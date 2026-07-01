@@ -1,3 +1,6 @@
 # CLion defaults
 .idea/
 cmake-build-debug/
+
+# Dataset
+dataset/
