@@ -15,7 +15,7 @@ Find recipes using ingredients you have on hand.
  - In your code editor or IDE, navigate to the project and use command ``git checkout [branch name]``.
 #### Notes
 - Before starting work, ensure to ``git pull`` for the latest updates. (``git pull origin main`` if needed)
-- Ensure to``git add [filepath or .]`` and git ``git commit -m "[message]"`` every time you make marginal progress.
+- Ensure to``git add [filepath or .]`` and ``git commit -m "[message]"`` every time you make marginal progress.
 - Use ``git push`` when your changes are ready to be pushed to the branch.
 - Document all methods and functions in [this documentation](https://docs.google.com/document/d/1wpaZSOx3Bql3ahKisEiDF4Ub_wttGJqreJTHL9evK2c/edit?tab=t.4vus17tgb0ye) with a short description and their **input (parameters/arguments)** and **output (return value)**.
 - Do not push directly to ``main`` with substantial changes. Instead, go to the ``Pull requests`` tab, and create a ``New pull request`` from the branch to main. Ensure that the changes are ready. Request a review from a teammate.
