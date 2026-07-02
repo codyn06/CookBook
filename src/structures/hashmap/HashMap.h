@@ -1,9 +1,8 @@
 #ifndef HASHMAP_H
 #define HASHMAP_H
 
-
-class HashMap {
+class HashMap
+{
 };
 
-
-#endif //HASHMAP_H
+#endif // HASHMAP_H
