@@ -7,6 +7,7 @@ add_executable(Project_2 src/main.cpp
         src/data/data.h
         src/data/data.cpp
         src/data/Recipe.h
+        src/structures/Structure.h
         src/structures/hashmap/HashMap.cpp
         src/structures/hashmap/HashMap.h
         src/structures/graph/Graph.cpp
