@@ -27,8 +27,6 @@ CookBook/
 ├── src/
 │   ├── main.cpp
 │   ├── data/                 # CSV loading & parsing
-│   │   ├── data.h
-│   │   └── data.cpp
 │   ├── structures/
 │   │   ├── hashmap/          # Inverted hash map implementation
 │   │   └── graph/            # Bipartite graph implementation
