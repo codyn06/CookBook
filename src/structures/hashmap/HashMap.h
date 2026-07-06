@@ -23,6 +23,7 @@ private:
 
 public:
     HashMap(std::vector<Recipe> &recipes);
+    HashMap(int cap);
     void insert(const std::string &ingredient, int recipeId);
     std::vector<int> search(const std::string &ingredient);
     std::vector<Recipe> query(const std::vector<std::string> &pantry) override;
