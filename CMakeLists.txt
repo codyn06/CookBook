@@ -2,6 +2,15 @@ cmake_minimum_required(VERSION 4.1)
 project(Project_2)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+include(FetchContent)
+FetchContent_Declare(
+        Catch2
+        GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+        GIT_TAG v3.5.2
+)
+FetchContent_MakeAvailable(Catch2)
 
 add_executable(Project_2 src/main.cpp
         src/data/data.h
@@ -12,3 +21,11 @@ add_executable(Project_2 src/main.cpp
         src/structures/hashmap/HashMap.h
         src/structures/graph/Graph.cpp
         src/structures/graph/Graph.h)
+
+add_executable(Tests src/test/test.cpp src/structures/hashmap/HashMap.cpp)
+
+target_link_libraries(Tests PRIVATE Catch2::Catch2WithMain)
+
+include(CTest)
+include(Catch)
+catch_discover_tests(Tests)
