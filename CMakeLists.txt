@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 4.1)
+cmake_minimum_required(VERSION 3.14)
 project(Project_2)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -22,8 +22,15 @@ add_executable(Project_2 src/main.cpp
         src/structures/graph/Graph.cpp
         src/structures/graph/Graph.h)
 
-add_executable(Tests src/test/test.cpp src/structures/hashmap/HashMap.cpp)
+target_include_directories(Project_2 PRIVATE src)
 
+add_executable(Tests
+        src/test/test.cpp
+        src/structures/hashmap/HashMap.cpp
+        src/data/data.cpp
+)
+
+target_include_directories(Tests PRIVATE src)
 target_link_libraries(Tests PRIVATE Catch2::Catch2WithMain)
 
 include(CTest)
