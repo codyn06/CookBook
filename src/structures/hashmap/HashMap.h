@@ -22,7 +22,7 @@ private:
     int hashFunction(const std::string &ingredient);
 
 public:
-    HashMap(std::vector<Recipe> &recipes);
+    HashMap(const std::vector<Recipe> &recipes);
     HashMap(int cap);
     void insert(const std::string &ingredient, int recipeId);
     std::vector<int> search(const std::string &ingredient);
