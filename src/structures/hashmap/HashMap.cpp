@@ -31,3 +31,19 @@ int HashMap::hashFunction(const std::string &ingredient)
     }
     return hash_value % capacity;
 }
+
+HashMap::~HashMap()
+{
+    for (int i = 0; i < capacity; i++)
+    {
+        HashNode *curr = table[i];
+
+        while (curr != nullptr)
+        {
+            HashNode *next = curr->next;
+            delete curr;
+            curr = next;
+        }
+        table[i] = nullptr;
+    }
+}
