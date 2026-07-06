@@ -3,6 +3,16 @@ HashMap::HashMap(int cap = 100003) : capacity(cap), size(0)
 {
     table.resize(cap, nullptr);
 }
+HashMap::HashMap(const std::vector<Recipe> &recipes)
+{
+    for (const auto &r : recipes)
+    {
+        for (const auto &i : r.ner)
+        {
+            insert(i, r.id);
+        }
+    }
+}
 void insert(const std::string &ingredient, int recipeId)
 {
 }
