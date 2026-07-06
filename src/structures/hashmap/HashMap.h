@@ -15,6 +15,10 @@ struct HashNode
 class HashMap : public Structure
 {
 private:
+    std::vector<HashNode *> table;
+    int capacity;
+    int size;
+
     int hashFunction(const std::string &ingredient);
 
 public:
