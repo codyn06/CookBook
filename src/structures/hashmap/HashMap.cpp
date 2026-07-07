@@ -18,38 +18,41 @@ void HashMap::insert(const std::string &ingredient, int recipeId)
 {
     int i = hashFunction(ingredient);
 
-    HashNode* curr = table[i];
-    while (curr != nullptr) {
+    HashNode *curr = table[i];
+    while (curr != nullptr)
+    {
         // Ingredient already exists -> append to Id tor ecipe list and return
-        if (curr->ingredient == ingredient) {
+        if (curr->ingredient == ingredient)
+        {
             curr->recipeIds.push_back(recipeId);
             return;
         }
         curr = curr->next;
     }
 
-    HashNode* new_node = new HashNode(ingredient);
+    HashNode *new_node = new HashNode(ingredient);
     new_node->recipeIds.push_back(recipeId);
 
     new_node->next = table[i];
     table[i] = new_node;
     size++;
-
 }
 
 std::vector<int> HashMap::search(const std::string &ingredient)
 {
     int i = hashFunction(ingredient);
 
-    HashNode* curr = table[i];
+    HashNode *curr = table[i];
 
-    while (curr != nullptr) {
-        if (curr->ingredient == ingredient) {
+    while (curr != nullptr)
+    {
+        if (curr->ingredient == ingredient)
+        {
             return curr->recipeIds;
         }
         curr = curr->next;
     }
-    return std::vector<int> {};
+    return std::vector<int>{};
 }
 
 int HashMap::hashFunction(const std::string &ingredient)
@@ -78,4 +81,9 @@ HashMap::~HashMap()
         }
         table[i] = nullptr;
     }
+}
+
+std::vector<Recipe> HashMap::query(const std::vector<std::string> &pantry)
+{
+    return {};
 }
