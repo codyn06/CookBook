@@ -4,6 +4,8 @@
 #include "rapidcsv.h"
 #include "Recipe.h"
 
+
+std::vector<std::string> parseStringifiedList(const std::string& listString);
 std::vector<Recipe> loadRecipes(const std::string& filename);
 
 #endif //DATA_H
