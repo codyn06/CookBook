@@ -116,3 +116,34 @@ TEST_CASE("HashMap: empty pantry returns empty result", "[hashmap]")
 
     CHECK(results.empty());
 }
+
+TEST_CASE("HashMap: heap returns top N in correct order", "[hashmap][heap]")
+{
+    auto recipes = makeRecipes();
+    HashMap hm(recipes);
+
+    std::vector<std::string> pantry = {"salt", "eggs"};
+
+    auto top2 = hm.getTopN(pantry, 2);
+
+    REQUIRE(top2.size() == 2);
+
+    CHECK(top2[0].recipe.title == "Omelette");
+    CHECK(top2[0].score == Catch::Approx(2.0 / 3.0));
+
+    CHECK(top2[1].recipe.title == "Pasta");
+    CHECK(top2[1].score == Catch::Approx(1.0 / 3.0));
+}
+
+TEST_CASE("HashMap: heap handles N larger than result size", "[hashmap][heap]")
+{
+    auto recipes = makeRecipes();
+    HashMap hm(recipes);
+
+    std::vector<std::string> pantry = {"salt"};
+    auto results = hm.query(pantry);
+
+    auto top10 = hm.getTopN(pantry, 10);
+
+    REQUIRE(top10.size() == 2);
+}
