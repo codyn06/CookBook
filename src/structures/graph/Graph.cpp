@@ -85,5 +85,4 @@ std::vector<RecipeMatch> Graph::getTopN(const std::vector<std::string> &pantry, 
     }
 
     return topN;
-
 }

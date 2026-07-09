@@ -29,6 +29,7 @@ public:
     void insert(const std::string &ingredient, int recipeId);
     std::vector<int> search(const std::string &ingredient);
     std::vector<RecipeMatch> query(const std::vector<std::string> &pantry) override;
+    std::vector<RecipeMatch> getTopN(const std::vector<std::string> &pantry, int N);
     ~HashMap();
 };
 
