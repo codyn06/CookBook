@@ -65,6 +65,15 @@ add_executable(Test_Integration
 target_include_directories(Test_Integration PRIVATE src)
 target_link_libraries(Test_Integration PRIVATE Catch2::Catch2WithMain)
 
+add_executable(Test_IngredientInput
+        tests/test_ingredientinput.cpp
+        src/gui/ingredientinput.cpp
+        src/gui/flowlayout.cpp
+)
+
+target_include_directories(Test_IngredientInput PRIVATE src)
+target_link_libraries(Test_IngredientInput PRIVATE Qt6::Widgets)
+
 include(CTest)
 include(Catch)
 catch_discover_tests(Tests)

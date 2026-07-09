@@ -74,7 +74,7 @@ QLayoutItem *FlowLayout::takeAt(int index)
 QSize FlowLayout::minimumSize() const
 {
     QSize size;
-    for (const QLayoutItem *item : qAsConst(itemList))
+    for (const QLayoutItem *item : std::as_const(itemList))
         size = size.expandedTo(item->minimumSize());
     const QMargins margins = contentsMargins();
     size += QSize(margins.left() + margins.right(), margins.top() + margins.bottom());
