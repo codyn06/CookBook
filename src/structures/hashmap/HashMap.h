@@ -18,7 +18,8 @@ private:
     std::vector<HashNode *> table;
     int capacity;
     int size;
-
+    
+    std::unordered_map<int, Recipe> recipeLookup;
     int hashFunction(const std::string &ingredient);
 
 public:
@@ -26,7 +27,7 @@ public:
     HashMap(int cap);
     void insert(const std::string &ingredient, int recipeId);
     std::vector<int> search(const std::string &ingredient);
-    std::vector<Recipe> query(const std::vector<std::string> &pantry) override;
+    std::vector<RecipeMatch> query(const std::vector<std::string> &pantry) override;
     ~HashMap();
 };
 
