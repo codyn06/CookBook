@@ -50,3 +50,11 @@ void IngredientInput::removeIngredientTag(const std::string &ingredient)
         std::remove(selectedIngredients.begin(), selectedIngredients.end(), ingredient),
         selectedIngredients.end());
 }
+
+void IngredientInput::onNextClicked()
+{
+    if (!selectedIngredients.empty())
+    {
+        emit ingredientsSubmitted(selectedIngredients);
+    }
+}
