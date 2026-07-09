@@ -16,10 +16,11 @@ private:
 public:
     Graph(const std::vector<Recipe> &recipes);
     std::vector<RecipeMatch> query(const std::vector<std::string> &pantry) override;
-    const std::unordered_map<std::string, std::vector<int>>& getAdjacencyList() const {
+    const std::unordered_map<std::string, std::vector<int>> &getAdjacencyList() const
+    {
         return adjacencyList;
     }
-    std::vector<RecipeMatch> getTopN(const std::vector<RecipeMatch>& matches, int N);
+    std::vector<RecipeMatch> getTopN(const std::vector<RecipeMatch> &matches, int N);
 };
 
 #endif // GRAPH_H

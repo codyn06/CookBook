@@ -2,6 +2,7 @@
 #define HASHMAP_H
 
 #include "../Structure.h"
+#include <unordered_map>
 
 struct HashNode
 {
@@ -18,7 +19,7 @@ private:
     std::vector<HashNode *> table;
     int capacity;
     int size;
-    
+
     std::unordered_map<int, Recipe> recipeLookup;
     int hashFunction(const std::string &ingredient);
 

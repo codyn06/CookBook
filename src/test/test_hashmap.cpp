@@ -4,7 +4,8 @@
 #include "../structures/hashmap/HashMap.h"
 #include "../data/Recipe.h"
 
-static std::vector<Recipe> makeRecipes() {
+static std::vector<Recipe> makeRecipes()
+{
     Recipe r1;
     r1.id = 1;
     r1.title = "Pasta";
@@ -23,7 +24,8 @@ static std::vector<Recipe> makeRecipes() {
     return {r1, r2, r3};
 }
 
-TEST_CASE("HashMap: insert and search basic", "[hashmap]") {
+TEST_CASE("HashMap: insert and search basic", "[hashmap]")
+{
     HashMap hm(100);
 
     hm.insert("salt", 1);
@@ -36,14 +38,16 @@ TEST_CASE("HashMap: insert and search basic", "[hashmap]") {
     CHECK((ids[0] == 2 || ids[1] == 2));
 }
 
-TEST_CASE("HashMap: search missing ingredient returns empty vector", "[hashmap]") {
+TEST_CASE("HashMap: search missing ingredient returns empty vector", "[hashmap]")
+{
     HashMap hm(100);
     hm.insert("salt", 1);
     auto ids = hm.search("pepper");
     CHECK(ids.empty());
 }
 
-TEST_CASE("HashMap: handles collisions correctly", "[hashmap]") {
+TEST_CASE("HashMap: handles collisions correctly", "[hashmap]")
+{
     HashMap hm(5); // small capacity to force collisions
 
     hm.insert("salt", 1);
@@ -58,7 +62,8 @@ TEST_CASE("HashMap: handles collisions correctly", "[hashmap]") {
     CHECK(std::find(ids.begin(), ids.end(), 3) != ids.end());
 }
 
-TEST_CASE("HashMap: constructor builds inverted index from recipes", "[hashmap]") {
+TEST_CASE("HashMap: constructor builds inverted index from recipes", "[hashmap]")
+{
     auto recipes = makeRecipes();
     HashMap hm(recipes);
 
@@ -72,7 +77,8 @@ TEST_CASE("HashMap: constructor builds inverted index from recipes", "[hashmap]"
     CHECK(breadIds[0] == 3);
 }
 
-TEST_CASE("HashMap: query returns correct RecipeMatch results", "[hashmap]") {
+TEST_CASE("HashMap: query returns correct RecipeMatch results", "[hashmap]")
+{
     auto recipes = makeRecipes();
     HashMap hm(recipes);
 
@@ -83,22 +89,25 @@ TEST_CASE("HashMap: query returns correct RecipeMatch results", "[hashmap]") {
     REQUIRE(results.size() == 2); // Pasta + Omelette
 
     auto omelette = std::find_if(results.begin(), results.end(),
-                                 [](const RecipeMatch& rm){ return rm.recipe.id == 2; });
+                                 [](const RecipeMatch &rm)
+                                 { return rm.recipe.id == 2; });
     REQUIRE(omelette != results.end());
-    CHECK(omelette->score == Catch::Approx(2.0/3.0));
+    CHECK(omelette->score == Catch::Approx(2.0 / 3.0));
     CHECK(omelette->missing.size() == 1);
     CHECK(omelette->missing[0] == "pepper");
 
     auto pasta = std::find_if(results.begin(), results.end(),
-                              [](const RecipeMatch& rm){ return rm.recipe.id == 1; });
+                              [](const RecipeMatch &rm)
+                              { return rm.recipe.id == 1; });
     REQUIRE(pasta != results.end());
-    CHECK(pasta->score == Catch::Approx(1.0/3.0));
+    CHECK(pasta->score == Catch::Approx(1.0 / 3.0));
     CHECK(pasta->missing.size() == 2);
     CHECK((pasta->missing[0] == "pasta" || pasta->missing[1] == "pasta"));
     CHECK((pasta->missing[0] == "olive oil" || pasta->missing[1] == "olive oil"));
 }
 
-TEST_CASE("HashMap: empty pantry returns empty result", "[hashmap]") {
+TEST_CASE("HashMap: empty pantry returns empty result", "[hashmap]")
+{
     auto recipes = makeRecipes();
     HashMap hm(recipes);
 

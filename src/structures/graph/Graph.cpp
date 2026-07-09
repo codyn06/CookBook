@@ -1,12 +1,15 @@
 #include "Graph.h"
 #include <unordered_set>
+#include <queue>
 
 Graph::Graph(const std::vector<Recipe> &recipes)
 {
-    for (const auto &r : recipes) {
+    for (const auto &r : recipes)
+    {
         recipeLookup[r.id] = r;
 
-        for (const auto &ing : r.ner) {
+        for (const auto &ing : r.ner)
+        {
             adjacencyList[ing].push_back(r.id);
         }
     }
@@ -16,10 +19,13 @@ std::vector<RecipeMatch> Graph::query(const std::vector<std::string> &pantry)
 {
     std::unordered_map<int, int> matchCounts;
 
-    for (const auto &ing : pantry) {
+    for (const auto &ing : pantry)
+    {
         auto it = adjacencyList.find(ing);
-        if (it != adjacencyList.end()) {
-            for (int recipeId : it->second) {
+        if (it != adjacencyList.end())
+        {
+            for (int recipeId : it->second)
+            {
                 matchCounts[recipeId]++;
             }
         }
@@ -28,7 +34,8 @@ std::vector<RecipeMatch> Graph::query(const std::vector<std::string> &pantry)
     std::unordered_set<std::string> pantrySet(pantry.begin(), pantry.end());
     std::vector<RecipeMatch> results;
 
-    for (const auto &pair : matchCounts) {
+    for (const auto &pair : matchCounts)
+    {
         int recipeId = pair.first;
         int matches = pair.second;
 
@@ -38,8 +45,10 @@ std::vector<RecipeMatch> Graph::query(const std::vector<std::string> &pantry)
         double score = static_cast<double>(matches) / total;
 
         std::vector<std::string> missing;
-        for (const auto &ing : r.ner) {
-            if (!pantrySet.count(ing)) {
+        for (const auto &ing : r.ner)
+        {
+            if (!pantrySet.count(ing))
+            {
                 missing.push_back(ing);
             }
         }
@@ -50,24 +59,27 @@ std::vector<RecipeMatch> Graph::query(const std::vector<std::string> &pantry)
     return results;
 }
 
-std::vector<RecipeMatch> Graph::getTopN(const std::vector<RecipeMatch>& matches, int N)
+std::vector<RecipeMatch> Graph::getTopN(const std::vector<RecipeMatch> &matches, int N)
 {
-    auto cmp = [](const RecipeMatch &a, const RecipeMatch &b) {
+    auto cmp = [](const RecipeMatch &a, const RecipeMatch &b)
+    {
         return a.score < b.score;
     };
 
     std::priority_queue<
         RecipeMatch,
         std::vector<RecipeMatch>,
-        decltype(cmp)
-    > pq(cmp);
+        decltype(cmp)>
+        pq(cmp);
 
-    for (const auto &m : matches) {
+    for (const auto &m : matches)
+    {
         pq.push(m);
     }
 
     std::vector<RecipeMatch> topN;
-    for (int i = 0; i < N && !pq.empty(); i++) {
+    for (int i = 0; i < N && !pq.empty(); i++)
+    {
         topN.push_back(pq.top());
         pq.pop();
     }

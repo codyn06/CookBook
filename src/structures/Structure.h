@@ -5,7 +5,8 @@
 #include <string>
 #include "../data/Recipe.h"
 
-struct RecipeMatch {
+struct RecipeMatch
+{
     Recipe recipe;
     double score;
     std::vector<std::string> missing;
@@ -15,6 +16,7 @@ class Structure
 {
 public:
     virtual ~Structure() = default;
-    virtual std::vector<RecipeMatch> query(const std::vector<std::string>& pantry) = 0;};
+    virtual std::vector<RecipeMatch> query(const std::vector<std::string> &pantry) = 0;
+};
 
 #endif // STRUCTURE_H
