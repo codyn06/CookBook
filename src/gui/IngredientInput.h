@@ -1,5 +1,5 @@
-#ifndef INGREDIENT_INPUT_H
-#define INGREDIENT_INPUT_H
+#ifndef INGREDIENTINPUT_H
+#define INGREDIENTINPUT_H
 
 #include <QWidget>
 #include <QLineEdit>
@@ -15,6 +15,7 @@ class IngredientInput : public QWidget
 
 public:
     explicit IngredientInput(QWidget *parent = nullptr);
+
     std::vector<std::string> getSelectedIngredients() const;
 
 signals:
@@ -22,19 +23,16 @@ signals:
 
 private slots:
     void onAddIngredientText();
-    void onChipToggled(const QString &ingredient, bool checked);
     void onNextClicked();
 
 private:
     void setupUi();
-    void addChip(const QString &ingredient);
-    void addIngredientToList(const std::string &ingredient);
-    void removeIngredientFromList(const std::string &ingredient);
+    void addIngredientTag(const std::string &ingredient);
+    void removeIngredientTag(const std::string &ingredient);
 
     QLineEdit *ingredientTextField;
     QPushButton *nextButton;
-    QHBoxLayout *chipLayout;
-    QVBoxLayout *selectedListLayout;
+    QVBoxLayout *tagLayout;
 
     std::vector<std::string> selectedIngredients;
 };
