@@ -30,6 +30,8 @@ add_executable(Project_2
         src/structures/hashmap/HashMap.h
         src/structures/graph/Graph.cpp
         src/structures/graph/Graph.h
+        src/gui/IngredientInput.h
+        src/gui/IngredientInput.cpp
 )
 
 target_include_directories(Project_2 PRIVATE src)
