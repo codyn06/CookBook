@@ -58,3 +58,8 @@ void IngredientInput::onNextClicked()
         emit ingredientsSubmitted(selectedIngredients);
     }
 }
+
+std::vector<std::string> IngredientInput::getSelectedIngredients() const
+{
+    return selectedIngredients;
+}
