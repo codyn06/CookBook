@@ -1,9 +1,7 @@
-#include <catch2/catch_test_macros.hpp>
-#include <catch2/catch_approx.hpp>
-
-#include "../data/data.h"
-#include "../structures/hashmap/HashMap.h"
-#include "../structures/graph/Graph.h"
+#include "structures/graph/Graph.h"
+#include "catch2/catch_test_macros.hpp"
+#include "data/data.h"
+#include "structures/hashmap/HashMap.h"
 
 TEST_CASE("Integration: loader + hashmap + graph + query + ranking", "[integration]") {
 

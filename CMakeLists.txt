@@ -32,7 +32,8 @@ add_executable(Tests
         tests/test_graph.cpp
         src/structures/graph/Graph.cpp
         src/structures/hashmap/HashMap.cpp
-        tests/test_hashmap.cpp)
+        tests/test_hashmap.cpp
+        tests/test_integration.cpp)
 
 target_include_directories(Tests PRIVATE src)
 target_link_libraries(Tests PRIVATE Catch2::Catch2WithMain)
