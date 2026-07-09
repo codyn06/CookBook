@@ -47,11 +47,21 @@ std::vector<std::string> parseCSVRow(const std::string &line)
     std::string current = "";
     bool inQuotes = false;
 
-    for (char c : line)
+    for (size_t i = 0; i < line.length(); ++i)
     {
+        char c = line[i];
+
         if (c == '"')
         {
-            inQuotes = !inQuotes;
+            if (inQuotes && i + 1 < line.length() && line[i + 1] == '"')
+            {
+                current += '"';
+                i++;
+            }
+            else
+            {
+                inQuotes = !inQuotes;
+            }
         }
         else if (c == ',' && !inQuotes)
         {
