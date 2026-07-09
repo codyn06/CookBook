@@ -24,11 +24,16 @@ add_executable(Project_2 src/main.cpp
 
 target_include_directories(Project_2 PRIVATE src)
 
-add_executable(Tests
-        src/test/test.cpp
-        src/structures/hashmap/HashMap.cpp
+add_executable(tests
+        tests/test_data.cpp
         src/data/data.cpp
-)
+        src/data/data.h
+        src/data/Recipe.h
+        src/data/rapidcsv.h
+        tests/test_graph.cpp
+        src/structures/graph/Graph.cpp
+        src/structures/hashmap/HashMap.cpp
+        tests/test_hashmap.cpp)
 
 target_include_directories(Tests PRIVATE src)
 target_link_libraries(Tests PRIVATE Catch2::Catch2WithMain)
