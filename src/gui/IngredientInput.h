@@ -1,0 +1,4 @@
+#ifndef INGREDIENT_INPUT_H
+#define INGREDIENT_INPUT_H
+
+#endif // INGREDIENT_INPUT_H
