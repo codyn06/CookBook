@@ -28,3 +28,18 @@ void IngredientInput::onAddIngredientText()
     addIngredientTag(text);
     ingredientTextField->clear();
 }
+
+void IngredientInput::addIngredientTag(const std::string &ingredient)
+{
+    QPushButton *tag = new QPushButton(QString::fromStdString(ingredient), this);
+    tag->setProperty("ingredient", QString::fromStdString(ingredient)); // store name on the widget
+
+    connect(tag, &QPushButton::clicked, this, [this, tag, ingredient]()
+            {
+                removeIngredientTag(ingredient);
+                tagLayout->removeWidget(tag);
+                tag->deleteLater(); // safely destroy the button
+            });
+
+    tagLayout->addWidget(tag);
+}
