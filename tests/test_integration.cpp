@@ -14,12 +14,10 @@ TEST_CASE("Integration: loader + hashmap + graph + query + ranking", "[integrati
     std::vector<std::string> pantry = {"salt", "eggs", "butter"};
 
     auto hm_results = hm.query(pantry);
-    auto g_results = g.query(pantry);
 
     REQUIRE(!hm_results.empty());
-    REQUIRE(!g_results.empty());
 
-    auto top5 = g.getTopN(g_results, 5);
+    auto top5 = g.getTopN(pantry, 5);
 
     REQUIRE(!top5.empty());
     REQUIRE(top5.size() <= 5);
