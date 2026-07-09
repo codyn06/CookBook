@@ -92,9 +92,8 @@ TEST_CASE("Graph: heap returns top N in correct order", "[graph][heap]")
     Graph g(recipes);
 
     std::vector<std::string> pantry = {"salt", "eggs"};
-    auto results = g.query(pantry);
 
-    auto top2 = g.getTopN(results, 2);
+    auto top2 = g.getTopN(pantry, 2);
 
     REQUIRE(top2.size() == 2);
 
@@ -113,7 +112,7 @@ TEST_CASE("Graph: heap handles N larger than result size", "[graph][heap]")
     std::vector<std::string> pantry = {"salt"};
     auto results = g.query(pantry);
 
-    auto top10 = g.getTopN(results, 10);
+    auto top10 = g.getTopN(pantry, 10);
 
     REQUIRE(top10.size() == 2);
 }

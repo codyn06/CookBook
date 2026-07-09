@@ -59,10 +59,11 @@ std::vector<RecipeMatch> Graph::query(const std::vector<std::string> &pantry)
     return results;
 }
 
-std::vector<RecipeMatch> Graph::getTopN(const std::vector<RecipeMatch> &matches, int N)
+std::vector<RecipeMatch> Graph::getTopN(const std::vector<std::string> &pantry, int N)
 {
-    auto cmp = [](const RecipeMatch &a, const RecipeMatch &b)
-    {
+    std::vector<RecipeMatch> matches = query(pantry);
+
+    auto cmp = [](const RecipeMatch &a, const RecipeMatch &b) {
         return a.score < b.score;
     };
 
@@ -78,8 +79,7 @@ std::vector<RecipeMatch> Graph::getTopN(const std::vector<RecipeMatch> &matches,
     }
 
     std::vector<RecipeMatch> topN;
-    for (int i = 0; i < N && !pq.empty(); i++)
-    {
+    for (int i = 0; i < N && !pq.empty(); i++) {
         topN.push_back(pq.top());
         pq.pop();
     }
