@@ -4,6 +4,12 @@ project(Project_2)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
+find_package(Qt6 COMPONENTS Core Widgets Gui REQUIRED)
+
 include(FetchContent)
 FetchContent_Declare(
         Catch2
@@ -12,7 +18,10 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(Project_2 src/main.cpp
+add_executable(Project_2
+        src/main.cpp
+
+        # Backend
         src/data/data.h
         src/data/data.cpp
         src/data/Recipe.h
@@ -20,9 +29,11 @@ add_executable(Project_2 src/main.cpp
         src/structures/hashmap/HashMap.cpp
         src/structures/hashmap/HashMap.h
         src/structures/graph/Graph.cpp
-        src/structures/graph/Graph.h)
+        src/structures/graph/Graph.h
+)
 
 target_include_directories(Project_2 PRIVATE src)
+target_link_libraries(Project_2 PRIVATE Qt6::Core Qt6::Widgets Qt6::Gui)
 
 add_executable(Tests
         tests/test_data.cpp
