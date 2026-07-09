@@ -2,16 +2,25 @@
 #define GRAPH_H
 
 #include "../Structure.h"
-#include <map>
+#include "../../data/Recipe.h"
+#include <unordered_map>
+#include <string>
+#include <vector>
+
 class Graph : public Structure
 {
 private:
-    std::map<std::string, std::vector<int>> adjacencyList;
-    std::vector<int> recipeDegrees;
+    std::unordered_map<std::string, std::vector<int>> adjacencyList;
+    std::unordered_map<int, Recipe> recipeLookup;
 
 public:
     Graph(const std::vector<Recipe> &recipes);
-    std::vector<Recipe> query(const std::vector<std::string> &pantry) override;
+    std::vector<RecipeMatch> query(const std::vector<std::string> &pantry) override;
+    const std::unordered_map<std::string, std::vector<int>> &getAdjacencyList() const
+    {
+        return adjacencyList;
+    }
+    std::vector<RecipeMatch> getTopN(const std::vector<RecipeMatch> &matches, int N);
 };
 
 #endif // GRAPH_H

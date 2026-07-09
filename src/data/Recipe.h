@@ -3,8 +3,8 @@
 #include <string>
 #include <vector>
 
-
-struct Recipe {
+struct Recipe
+{
     int id;
     std::string title;
     std::vector<std::string> ingredients;
@@ -13,5 +13,4 @@ struct Recipe {
     std::vector<std::string> ner;
 };
 
-
-#endif //RECIPE_H
+#endif // RECIPE_H

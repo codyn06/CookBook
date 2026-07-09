@@ -1,12 +1,22 @@
 #include "HashMap.h"
-HashMap::HashMap(int cap = 100003) : capacity(cap), size(0)
+
+#include <unordered_set>
+#include <queue>
+
+HashMap::HashMap(int cap) : capacity(cap), size(0)
 {
     table.resize(cap, nullptr);
 }
+
 HashMap::HashMap(const std::vector<Recipe> &recipes)
 {
+    capacity = 100003;
+    size = 0;
+    table.resize(capacity, nullptr);
+
     for (const auto &r : recipes)
     {
+        recipeLookup[r.id] = r;
         for (const auto &i : r.ner)
         {
             insert(i, r.id);
@@ -14,49 +24,91 @@ HashMap::HashMap(const std::vector<Recipe> &recipes)
     }
 }
 
+std::vector<RecipeMatch> HashMap::query(const std::vector<std::string> &pantry)
+{
+    std::unordered_map<int, int> matchCounts;
+
+    for (const auto &pantryIng : pantry)
+    {
+        std::vector<int> ids = search(pantryIng);
+        for (int recipeId : ids)
+        {
+            matchCounts[recipeId]++;
+        }
+    }
+
+    std::vector<RecipeMatch> results;
+    std::unordered_set<std::string> pantrySet(pantry.begin(), pantry.end());
+
+    for (const auto &pair : matchCounts)
+    {
+        int recipeId = pair.first;
+        int matches = pair.second;
+
+        const Recipe &r = recipeLookup.at(recipeId);
+
+        int totalIngredients = r.ner.size();
+        double score = static_cast<double>(matches) / totalIngredients;
+
+        std::vector<std::string> missing;
+        for (const auto &ing : r.ner)
+        {
+            if (pantrySet.find(ing) == pantrySet.end())
+            {
+                missing.push_back(ing);
+            }
+        }
+
+        results.push_back({r, score, missing});
+    }
+
+    return results;
+}
+
 void HashMap::insert(const std::string &ingredient, int recipeId)
 {
     int i = hashFunction(ingredient);
 
-    HashNode* curr = table[i];
-    while (curr != nullptr) {
-        // Ingredient already exists -> append to Id tor ecipe list and return
-        if (curr->ingredient == ingredient) {
+    HashNode *curr = table[i];
+    while (curr != nullptr)
+    {
+        if (curr->ingredient == ingredient)
+        {
             curr->recipeIds.push_back(recipeId);
             return;
         }
         curr = curr->next;
     }
 
-    HashNode* new_node = new HashNode(ingredient);
+    HashNode *new_node = new HashNode(ingredient);
     new_node->recipeIds.push_back(recipeId);
 
     new_node->next = table[i];
     table[i] = new_node;
     size++;
-
 }
 
 std::vector<int> HashMap::search(const std::string &ingredient)
 {
     int i = hashFunction(ingredient);
 
-    HashNode* curr = table[i];
+    HashNode *curr = table[i];
 
-    while (curr != nullptr) {
-        if (curr->ingredient == ingredient) {
+    while (curr != nullptr)
+    {
+        if (curr->ingredient == ingredient)
+        {
             return curr->recipeIds;
         }
         curr = curr->next;
     }
-    return std::vector<int> {};
+    return std::vector<int>{};
 }
 
 int HashMap::hashFunction(const std::string &ingredient)
 {
 
     unsigned int hash_value = 0;
-    // Hash value = multiply current hash value by 31 (base 31) and add the ASCII value of the char in the string
     for (char c : ingredient)
     {
         hash_value = (hash_value * 31) + c;
