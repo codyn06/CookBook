@@ -1,8 +1,8 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/catch_approx.hpp>
 
-#include "../structures/hashmap/HashMap.h"
-#include "../data/Recipe.h"
+#include "../src/structures/hashmap/HashMap.h"
+#include "../src/data/Recipe.h"
 
 static std::vector<Recipe> makeRecipes()
 {

@@ -1,8 +1,8 @@
 #include <catch2/catch_test_macros.hpp>
 #include <catch2/catch_approx.hpp>
 
-#include "../structures/graph/Graph.h"
-#include "../data/Recipe.h"
+#include "../src/structures/graph/Graph.h"
+#include "../src/data/Recipe.h"
 
 static std::vector<Recipe> makeRecipes()
 {
