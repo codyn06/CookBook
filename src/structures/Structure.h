@@ -17,7 +17,7 @@ class Structure
 public:
     virtual ~Structure() = default;
     virtual std::vector<RecipeMatch> query(const std::vector<std::string> &pantry) = 0;
-    std::vector<RecipeMatch> getTopN(const std::vector<std::string> &pantry, int N);
+    virtual std::vector<RecipeMatch> getTopN(const std::vector<std::string> &pantry, int N) = 0;
 };
 
 #endif // STRUCTURE_H

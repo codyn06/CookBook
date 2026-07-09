@@ -20,6 +20,8 @@ public:
     {
         return adjacencyList;
     }
+    std::vector<RecipeMatch> getTopN(const std::vector<std::string> &pantry, int N);
+
 };
 
 #endif // GRAPH_H
