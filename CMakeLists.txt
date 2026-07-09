@@ -33,10 +33,22 @@ add_executable(Tests
         src/structures/graph/Graph.cpp
         src/structures/hashmap/HashMap.cpp
         tests/test_hashmap.cpp
-        tests/test_integration.cpp)
+)
 
 target_include_directories(Tests PRIVATE src)
 target_link_libraries(Tests PRIVATE Catch2::Catch2WithMain)
+
+add_executable(Test_Integration
+        tests/test_integration.cpp
+        src/data/data.cpp
+        src/data/data.h
+        src/data/Recipe.h
+        src/structures/graph/Graph.cpp
+        src/structures/hashmap/HashMap.cpp
+)
+
+target_include_directories(Test_Integration PRIVATE src)
+target_link_libraries(Test_Integration PRIVATE Catch2::Catch2WithMain)
 
 include(CTest)
 include(Catch)
