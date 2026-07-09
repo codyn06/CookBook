@@ -30,6 +30,10 @@ add_executable(Project_2
         src/structures/hashmap/HashMap.h
         src/structures/graph/Graph.cpp
         src/structures/graph/Graph.h
+        src/gui/IngredientInput.h
+        src/gui/IngredientInput.cpp
+        src/gui/flowlayout.h
+        src/gui/flowlayout.cpp
 )
 
 target_include_directories(Project_2 PRIVATE src)
@@ -60,6 +64,15 @@ add_executable(Test_Integration
 
 target_include_directories(Test_Integration PRIVATE src)
 target_link_libraries(Test_Integration PRIVATE Catch2::Catch2WithMain)
+
+add_executable(Test_IngredientInput
+        tests/test_ingredientinput.cpp
+        src/gui/ingredientinput.cpp
+        src/gui/flowlayout.cpp
+)
+
+target_include_directories(Test_IngredientInput PRIVATE src)
+target_link_libraries(Test_IngredientInput PRIVATE Qt6::Widgets)
 
 include(CTest)
 include(Catch)
