@@ -4,7 +4,7 @@
 #include <QWidget>
 #include <QLineEdit>
 #include <QPushButton>
-#include <QVBoxLayout>
+#include "flowlayout.h"
 #include <QHBoxLayout>
 #include <vector>
 #include <string>
@@ -32,7 +32,7 @@ private:
 
     QLineEdit *ingredientTextField;
     QPushButton *nextButton;
-    QVBoxLayout *tagLayout;
+    FlowLayout *tagLayout;
 
     std::vector<std::string> selectedIngredients;
 };

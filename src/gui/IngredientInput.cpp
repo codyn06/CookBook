@@ -6,7 +6,27 @@ IngredientInput::IngredientInput(QWidget *parent) : QWidget(parent)
     setupUi();
 }
 
-void IngredientInput::setupUi() {}
+void IngredientInput::setupUi()
+{
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);
+
+    ingredientTextField = new QLineEdit(this);
+    ingredientTextField->setPlaceholderText("(enter ingredients here...)");
+    mainLayout->addWidget(ingredientTextField);
+
+    // Enter pressed -> call onAddIngredientText()
+    connect(ingredientTextField, &QLineEdit::returnPressed,
+            this, &IngredientInput::onAddIngredientText);
+
+    tagLayout = new FlowLayout();
+    mainLayout->addLayout(tagLayout);
+
+    mainLayout->addStretch();
+
+    nextButton = new QPushButton("Next", this);
+    connect(nextButton, &QPushButton::clicked, this, &IngredientInput::onNextClicked);
+    mainLayout->addWidget(nextButton);
+}
 
 void IngredientInput::onAddIngredientText()
 {
