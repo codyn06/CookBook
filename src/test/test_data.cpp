@@ -80,9 +80,19 @@ static std::string writeTestCsv()
     return path;
 }
 
+// RAII File Guard: Automatically deletes the file when it goes out of scope
+struct FileCleaner
+{
+    std::string filepath;
+    FileCleaner(std::string path) : filepath(path) {}
+    ~FileCleaner() { std::remove(filepath.c_str()); }
+};
+
 TEST_CASE("loadRecipes: parses row count and basic fields correctly", "[loader]")
 {
     std::string path = writeTestCsv();
+    FileCleaner cleaner(path);
+
     auto recipes = loadRecipes(path);
 
     REQUIRE(recipes.size() == 2);
@@ -93,13 +103,13 @@ TEST_CASE("loadRecipes: parses row count and basic fields correctly", "[loader]"
 
     CHECK(recipes[1].id == 1);
     CHECK(recipes[1].title == "Simple Toast");
-
-    std::remove(path.c_str());
 }
 
 TEST_CASE("loadRecipes: ingredients, directions, and NER lists parse correctly", "[loader]")
 {
     std::string path = writeTestCsv();
+    FileCleaner cleaner(path);
+
     auto recipes = loadRecipes(path);
     REQUIRE(recipes.size() == 2);
 
@@ -129,11 +139,11 @@ TEST_CASE("loadRecipes: handles a recipe with empty ingredient list", "[loader]"
     out << R"(0,Mystery Dish,"[]","[]",www.example.com,Gathered,"[]")" << "\n";
     out.close();
 
+    FileCleaner cleaner(path);
+
     auto recipes = loadRecipes(path);
     REQUIRE(recipes.size() == 1);
     CHECK(recipes[0].ingredients.empty());
     CHECK(recipes[0].directions.empty());
     CHECK(recipes[0].ner.empty());
-
-    std::remove(path.c_str());
 }
