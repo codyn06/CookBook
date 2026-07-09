@@ -1,22 +1,23 @@
 #include "Graph.h"
-
 #include <unordered_set>
 
-Graph::Graph(const std::vector<Recipe> &recipes) {
-    for (const auto &recipe : recipes) {
-        recipeLookup[recipe.id] = recipe;
+Graph::Graph(const std::vector<Recipe> &recipes)
+{
+    for (const auto &r : recipes) {
+        recipeLookup[r.id] = r;
 
-        for (const auto &ingredient: recipe.ner) {
-            adjacencyList[ingredient].push_back(recipe.id);
+        for (const auto &ing : r.ner) {
+            adjacencyList[ing].push_back(r.id);
         }
     }
 }
 
-std::vector<RecipeMatch> Graph::query(const std::vector<std::string> &pantry) {
+std::vector<RecipeMatch> Graph::query(const std::vector<std::string> &pantry)
+{
     std::unordered_map<int, int> matchCounts;
 
-    for (const auto &pantryIng : pantry) {
-        auto it = adjacencyList.find(pantryIng);
+    for (const auto &ing : pantry) {
+        auto it = adjacencyList.find(ing);
         if (it != adjacencyList.end()) {
             for (int recipeId : it->second) {
                 matchCounts[recipeId]++;
@@ -24,22 +25,21 @@ std::vector<RecipeMatch> Graph::query(const std::vector<std::string> &pantry) {
         }
     }
 
+    std::unordered_set<std::string> pantrySet(pantry.begin(), pantry.end());
     std::vector<RecipeMatch> results;
 
     for (const auto &pair : matchCounts) {
         int recipeId = pair.first;
         int matches = pair.second;
 
-        const Recipe &r = recipeLookup[recipeId];
+        const Recipe &r = recipeLookup.at(recipeId);
 
-        int totalIngredients = r.ner.size();
-        double score = static_cast<double>(matches) / totalIngredients;
+        int total = r.ner.size();
+        double score = static_cast<double>(matches) / total;
 
-        std::unordered_set<std::string> pantrySet(pantry.begin(), pantry.end());
         std::vector<std::string> missing;
-
         for (const auto &ing : r.ner) {
-            if (pantrySet.find(ing) == pantrySet.end()) {
+            if (!pantrySet.count(ing)) {
                 missing.push_back(ing);
             }
         }
@@ -48,4 +48,29 @@ std::vector<RecipeMatch> Graph::query(const std::vector<std::string> &pantry) {
     }
 
     return results;
+}
+
+std::vector<RecipeMatch> Graph::getTopN(const std::vector<RecipeMatch>& matches, int N)
+{
+    auto cmp = [](const RecipeMatch &a, const RecipeMatch &b) {
+        return a.score < b.score;
+    };
+
+    std::priority_queue<
+        RecipeMatch,
+        std::vector<RecipeMatch>,
+        decltype(cmp)
+    > pq(cmp);
+
+    for (const auto &m : matches) {
+        pq.push(m);
+    }
+
+    std::vector<RecipeMatch> topN;
+    for (int i = 0; i < N && !pq.empty(); i++) {
+        topN.push_back(pq.top());
+        pq.pop();
+    }
+
+    return topN;
 }
