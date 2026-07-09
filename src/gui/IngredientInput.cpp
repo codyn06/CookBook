@@ -43,3 +43,10 @@ void IngredientInput::addIngredientTag(const std::string &ingredient)
 
     tagLayout->addWidget(tag);
 }
+
+void IngredientInput::removeIngredientTag(const std::string &ingredient)
+{
+    selectedIngredients.erase(
+        std::remove(selectedIngredients.begin(), selectedIngredients.end(), ingredient),
+        selectedIngredients.end());
+}
