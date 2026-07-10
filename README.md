@@ -11,6 +11,7 @@ Open the **MSYS2 MinGW 64-bit** terminal (not the plain MSYS2 terminal) and run:
 ```bash
 pacman -Syu
 ```
+
 Restart the terminal if prompted, then run:
 ```bash
 pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake mingw-w64-x86_64-qt6-base mingw-w64-x86_64-qt6-tools
@@ -50,7 +51,6 @@ cmake --build .
 ```bash
 ./CookBook.exe
 ```
-
 
 ## Project Structure
 
