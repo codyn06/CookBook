@@ -55,16 +55,16 @@ cmake --build .
 ## Project Structure
 
 ```CookBook/  
-├── dataset/ # Raw dataset (gitignored — see Setup)  
+├── dataset/           # Raw dataset (gitignored — see Setup)  
 │ └── full_dataset.csv  
 ├── src/  
 │ ├── main.cpp  
-│ ├── data/ # CSV loading & parsing  
-│ ├── gui/ # Qt interface (IngredientInput, FlowLayout, etc.)  
+│ ├── data/            # CSV loading & parsing  
+│ ├── gui/             # Qt interface (IngredientInput, FlowLayout, etc.)  
 │ └── structures/  
-│ ├── Structure.h # Shared interface for hash map & graph  
-│ ├── graph/ # Bipartite graph implementation  
-│ └── hashmap/ # Inverted hash map implementation  
+│ ├── Structure.h      # Shared interface for hash map & graph  
+│ ├── graph/           # Bipartite graph implementation  
+│ └── hashmap/         # Inverted hash map implementation  
 ├── tests/
 ├── .gitignore  
 ├── CMakeLists.txt  
