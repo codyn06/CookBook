@@ -44,7 +44,7 @@ Run these from the **MSYS2 MinGW 64-bit** terminal (or a regular terminal if `mi
 mkdir build
 cd build
 cmake .. -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH="C:/msys64/mingw64"
-cmake --build .
+cmake --build . --target CookBook
 ```
 
 ### Run
