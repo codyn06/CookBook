@@ -33,7 +33,7 @@ add_executable(CookBook
         src/gui/flowlayout.h
         src/gui/flowlayout.cpp
         src/gui/RecipeCard.h
-        
+        src/gui/RecipeCard.cpp
 )
 
 target_include_directories(CookBook PRIVATE src)
