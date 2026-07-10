@@ -31,6 +31,20 @@ void ResultsScreen::setRecipes(const std::vector<RecipeMatch> &matches) {
         delete child; 
     }
 
+    if (matches.empty()) {
+        QLabel *noResultsLabel = new QLabel("No recipes found. Try adding or adjusting your ingredients!", this);
+        
+        QFont emptyFont = noResultsLabel->font();
+        emptyFont.setPointSize(14);
+        emptyFont.setItalic(true);
+        noResultsLabel->setFont(emptyFont);
+        
+        noResultsLabel->setAlignment(Qt::AlignCenter);
+        
+        cardsLayout->addWidget(noResultsLabel);
+        return; 
+    }
+
     for (const RecipeMatch& match : matches) {
         RecipeCard *card = new RecipeCard(match, this);
         
