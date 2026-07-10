@@ -6,7 +6,7 @@ ResultsScreen::ResultsScreen(QWidget *parent) : QWidget(parent) {
 
     headerLabel = new QLabel("Top Recipes:", this);
     QFont headerFont = headerLabel->font();
-    headerFont.setPointSize(24); // Make it prominent like the wireframe
+    headerFont.setPointSize(24); 
     headerFont.setBold(true);
     headerLabel->setFont(headerFont);
 
