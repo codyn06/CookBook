@@ -1,6 +1,10 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
+MainWindow::MainWindow(Structure *graph, Structure *hashmap, QWidget *parent) 
+    : QMainWindow(parent),
+      graphStructure(graph),
+      hashMapStructure(hashmap)
+{
     stackedWidget = new QStackedWidget(this);
 
     inputScreen = new IngredientInput(this);

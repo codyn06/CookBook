@@ -14,6 +14,8 @@ int main(int argc, char *argv[])
 
     Graph graph(recipes);
     HashMap hashMap(recipes);
+
+    
     return app.exec();
 }
 
