@@ -10,13 +10,16 @@
 #include "StructureSelect.h"
 #include "ResultsScreen.h"
 #include "structures/Structure.h"
+#include "structures/graph/Graph.h"
+#include "structures/hashmap/HashMap.h"
+#include "data/data.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit MainWindow(Structure *graph, Structure *hashmap, QWidget *parent = nullptr);
-    ~MainWindow() = default;
+    explicit MainWindow(const std::vector<Recipe>& recipes, QWidget *parent = nullptr);
+    ~MainWindow();
 
 private slots:
     void handleIngredientsSubmitted(const std::vector<std::string> &ingredients);
@@ -30,6 +33,7 @@ private:
     ResultsScreen *resultsScreen;
 
     std::vector<std::string> currentIngredients;
+    std::vector<Recipe> allRecipes;
 
     Structure *graphStructure;
     Structure *hashMapStructure;

@@ -1,9 +1,10 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow(Structure *graph, Structure *hashmap, QWidget *parent)
+MainWindow::MainWindow(const std::vector<Recipe>& recipes, QWidget *parent)
     : QMainWindow(parent),
-      graphStructure(graph),
-      hashMapStructure(hashmap)
+      allRecipes(recipes),
+      graphStructure(nullptr),
+      hashMapStructure(nullptr)
 {
     stackedWidget = new QStackedWidget(this);
 
@@ -25,6 +26,11 @@ MainWindow::MainWindow(Structure *graph, Structure *hashmap, QWidget *parent)
             this, &MainWindow::handleStructureSelected);
 }
 
+MainWindow::~MainWindow() {
+    delete graphStructure;
+    delete hashMapStructure;
+}
+
 void MainWindow::handleIngredientsSubmitted(const std::vector<std::string> &ingredients)
 {
     currentIngredients = ingredients;
@@ -36,11 +42,17 @@ void MainWindow::handleStructureSelected(int selection)
     std::vector<RecipeMatch> matches;
 
     if (selection == StructureSelect::HASHMAP)
-    {
+    { 
+        if (hashMapStructure == nullptr) {
+            hashMapStructure = new HashMap(allRecipes);
+        }
         matches = hashMapStructure->getTopN(currentIngredients, 100);
     }
     else if (selection == StructureSelect::GRAPH)
     {
+        if (graphStructure == nullptr) {
+            graphStructure = new Graph(allRecipes);
+        }
         matches = graphStructure->getTopN(currentIngredients, 100);
     }
 

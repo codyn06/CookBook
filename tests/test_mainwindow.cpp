@@ -61,10 +61,7 @@ int main(int argc, char *argv[])
     r8.ner = {"ground beef", "cheese", "hamburger bun", "lettuce", "tomato"};
     testRecipes.push_back(r8);
 
-    Graph testGraph(testRecipes);
-    HashMap testHashMap(testRecipes);
-
-    MainWindow mainWindow(&testGraph, &testHashMap);
+    MainWindow mainWindow(testRecipes);
     mainWindow.setWindowTitle("Test: Main Flow");
     mainWindow.setFixedSize(960, 800);
     mainWindow.show();

@@ -24,10 +24,7 @@ int main(int argc, char *argv[])
 
     std::vector<Recipe> recipes = loadRecipes("../dataset/full_dataset.csv");
 
-    Graph graph(recipes);
-    HashMap hashmap(recipes);
-
-    MainWindow mainWindow(&graph, &hashmap);
+    MainWindow mainWindow(recipes);
     mainWindow.setWindowTitle("CookBook");
 
     splash.finish(&mainWindow);
