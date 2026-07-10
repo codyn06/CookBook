@@ -54,7 +54,8 @@ cmake --build .
 
 ## Project Structure
 
-```CookBook/  
+```
+CookBook/  
 ├── dataset/           # Raw dataset (gitignored — see Setup)  
 │ └── full_dataset.csv  
 ├── src/  
