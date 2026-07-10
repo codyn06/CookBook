@@ -115,6 +115,10 @@ std::vector<Recipe> loadRecipes(const std::string &filename)
         recipe.title = row[1];
         recipe.ner = parseStringifiedList(row[6]);
 
+        if (recipe.ner.size() <= 1)
+        {
+            continue;
+        }
         recipes.push_back(std::move(recipe));
 
         count++;
