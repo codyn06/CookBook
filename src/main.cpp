@@ -29,6 +29,8 @@ int main(int argc, char *argv[])
 
     MainWindow mainWindow(&graph, &hashmap);
     mainWindow.setWindowTitle("CookBook");
+
+    splash.finish(&mainWindow);
     mainWindow.show();
 
     return app.exec();
