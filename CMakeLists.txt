@@ -20,14 +20,17 @@ FetchContent_MakeAvailable(Catch2)
 
 add_executable(CookBook
         src/main.cpp
+
         src/data/data.h
         src/data/data.cpp
         src/data/Recipe.h
+
         src/structures/Structure.h
         src/structures/hashmap/HashMap.cpp
         src/structures/hashmap/HashMap.h
         src/structures/graph/Graph.cpp
         src/structures/graph/Graph.h
+        
         src/gui/IngredientInput.h
         src/gui/IngredientInput.cpp
         src/gui/flowlayout.h
@@ -38,6 +41,8 @@ add_executable(CookBook
         src/gui/ResultsScreen.cpp
         src/gui/StructureSelect.h
         src/gui/StructureSelect.cpp
+        src/gui/mainwindow.h
+        src/gui/mainwindow.cpp
 )
 
 target_include_directories(CookBook PRIVATE src)
