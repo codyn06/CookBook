@@ -34,10 +34,10 @@ void MainWindow::handleStructureSelected(int selection) {
     std::vector <RecipeMatch> matches;
 
     if (selection == StructureSelect::HASHMAP) {
-        matches = hashMapStructure->getTopN(currentIngredients, 4);
+        matches = hashMapStructure->getTopN(currentIngredients, 20);
     }
     else if (selection == StructureSelect::GRAPH) {
-        matches = graphStructure->getTopN(currentIngredients, 4);
+        matches = graphStructure->getTopN(currentIngredients, 20);
     }
 
     resultsScreen->setRecipes(matches);

@@ -20,7 +20,7 @@ public:
 private:
     QVBoxLayout *mainLayout;   
     QLabel *headerLabel;       
-    QHBoxLayout *cardsLayout;  
+    QGridLayout *cardsLayout;  
 };
 
 #endif // RESULTSSCREEN_H

@@ -1,5 +1,6 @@
 #include "ResultsScreen.h"
 #include "RecipeCard.h"
+#include <QScrollArea>
 
 ResultsScreen::ResultsScreen(QWidget *parent) : QWidget(parent) {
     mainLayout = new QVBoxLayout(this);
@@ -12,17 +13,22 @@ ResultsScreen::ResultsScreen(QWidget *parent) : QWidget(parent) {
 
     mainLayout->addWidget(headerLabel);
 
-    cardsLayout = new QHBoxLayout();
-    
-    cardsLayout->setAlignment(Qt::AlignLeft); 
+    QScrollArea *scrollArea = new QScrollArea(this);
+    scrollArea->setWidgetResizable(true); 
+    scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff); 
+    scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    scrollArea->setFrameShape(QFrame::NoFrame); 
 
-    mainLayout->addLayout(cardsLayout);
+    QWidget *scrollContainer = new QWidget();
 
-    mainLayout->addStretch();
+    cardsLayout = new QGridLayout(scrollContainer);
+    cardsLayout->setAlignment(Qt::AlignTop | Qt::AlignLeft); 
+
+    scrollArea->setWidget(scrollContainer);
+    mainLayout->addWidget(scrollArea);
 }
 
 void ResultsScreen::setRecipes(const std::vector<RecipeMatch> &matches) {
-    // Clear existing cards in the case that user did a previous search
     QLayoutItem *child;
     while ((child = cardsLayout->takeAt(0)) != nullptr) {
         if (child->widget()) {
@@ -41,13 +47,17 @@ void ResultsScreen::setRecipes(const std::vector<RecipeMatch> &matches) {
         
         noResultsLabel->setAlignment(Qt::AlignCenter);
         
-        cardsLayout->addWidget(noResultsLabel);
+        cardsLayout->addWidget(noResultsLabel, 0, 0); 
         return; 
     }
 
-    for (const RecipeMatch& match : matches) {
-        RecipeCard *card = new RecipeCard(match, this);
+    int columns = 4; 
+    for (size_t i = 0; i < matches.size(); ++i) {
+        RecipeCard *card = new RecipeCard(matches[i], this);
         
-        cardsLayout->addWidget(card);
+        int row = i / columns; 
+        int col = i % columns; 
+        
+        cardsLayout->addWidget(card, row, col);
     }
 }
