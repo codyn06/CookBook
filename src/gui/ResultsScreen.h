@@ -5,6 +5,8 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QGridLayout>
 #include <vector>
 
 #include "structures/Structure.h" 
@@ -17,9 +19,13 @@ public:
     
     void setRecipes(const std::vector<RecipeMatch> &matches);
 
+signals:
+    void homeRequested();
+
 private:
     QVBoxLayout *mainLayout;   
-    QLabel *headerLabel;       
+    QLabel *headerLabel;
+    QPushButton *homeButton;
     QGridLayout *cardsLayout;  
 };
 

@@ -7,12 +7,17 @@ ResultsScreen::ResultsScreen(QWidget *parent) : QWidget(parent) {
     
     mainLayout = new QVBoxLayout(this);
 
+    homeButton = new QPushButton("Home", this);
+    homeButton->setFixedSize(90, 35);
+    connect(homeButton, &QPushButton::clicked, this, &ResultsScreen::homeRequested);
+
     headerLabel = new QLabel("Top Recipes:", this);
     QFont headerFont = headerLabel->font();
     headerFont.setPointSize(24); 
     headerFont.setBold(true);
     headerLabel->setFont(headerFont);
 
+    mainLayout->addWidget(homeButton, 0, Qt::AlignLeft);
     mainLayout->addWidget(headerLabel);
 
     QScrollArea *scrollArea = new QScrollArea(this);

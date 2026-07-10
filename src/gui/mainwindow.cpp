@@ -24,6 +24,8 @@ MainWindow::MainWindow(const std::vector<Recipe>& recipes, QWidget *parent)
 
     connect(structureScreen, &StructureSelect::nextPressed,
             this, &MainWindow::handleStructureSelected);
+    connect(resultsScreen, &ResultsScreen::homeRequested,
+            this, &MainWindow::handleHomeRequested);
 }
 
 MainWindow::~MainWindow() {
@@ -58,4 +60,9 @@ void MainWindow::handleStructureSelected(int selection)
 
     resultsScreen->setRecipes(matches);
     stackedWidget->setCurrentIndex(2);
+}
+
+void MainWindow::handleHomeRequested()
+{
+    stackedWidget->setCurrentIndex(0);
 }

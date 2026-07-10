@@ -24,6 +24,7 @@ public:
 private slots:
     void handleIngredientsSubmitted(const std::vector<std::string> &ingredients);
     void handleStructureSelected(int selection);
+    void handleHomeRequested();
 
 private:
     QStackedWidget *stackedWidget;
