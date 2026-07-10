@@ -4,6 +4,11 @@ project(Project_2)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+find_package(Qt6 COMPONENTS Widgets REQUIRED)
+
 include(FetchContent)
 FetchContent_Declare(
         Catch2
@@ -20,7 +25,11 @@ add_executable(Project_2 src/main.cpp
         src/structures/hashmap/HashMap.cpp
         src/structures/hashmap/HashMap.h
         src/structures/graph/Graph.cpp
-        src/structures/graph/Graph.h)
+        src/structures/graph/Graph.h
+        src/gui/StructureSelect.h
+        src/gui/StructureSelect.cpp)
+
+target_link_libraries(Project_2 PRIVATE Qt6::Widgets)
 
 target_include_directories(Project_2 PRIVATE src)
 
