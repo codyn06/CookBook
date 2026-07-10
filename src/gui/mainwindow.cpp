@@ -29,3 +29,17 @@ void MainWindow::handleIngredientsSubmitted(const std::vector<std::string> &ingr
     currentIngredients = ingredients;
     stackedWidget->setCurrentIndex(1);
 }
+
+void MainWindow::handleStructureSelected(int selection) {
+    std::vector <RecipeMatch> matches;
+
+    if (selection == StructureSelect::HASHMAP) {
+        matches = hashMapStructure->getTopN(currentIngredients, 4);
+    }
+    else if (selection == StructureSelect::GRAPH) {
+        matches = graphStructure->getTopN(currentIngredients, 4);
+    }
+
+    resultsScreen->setRecipes(matches);
+    stackedWidget->setCurrentIndex(2);
+}
