@@ -95,6 +95,16 @@ add_executable(Test_Results
 target_include_directories(Test_Results PRIVATE src)
 target_link_libraries(Test_Results PRIVATE Qt6::Core Qt6::Widgets Qt6::Gui)
 
+add_executable(Test_StructureSelect
+        tests/test_structureselect.cpp
+        
+        src/gui/StructureSelect.h
+        src/gui/StructureSelect.cpp
+)
+
+target_include_directories(Test_StructureSelect PRIVATE src)
+target_link_libraries(Test_StructureSelect PRIVATE Qt6::Core Qt6::Widgets Qt6::Gui)
+
 include(CTest)
 include(Catch)
 catch_discover_tests(Tests)
