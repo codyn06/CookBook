@@ -18,7 +18,7 @@ RecipeCard::RecipeCard(const RecipeMatch& match, QWidget *parent)
 void RecipeCard::setupUi(const RecipeMatch& match) {
     QVBoxLayout *layout = new QVBoxLayout(this);
 
-    int displayScore = static_cast<int>(match.score);
+    int displayScore = static_cast<int>(match.score * 100.0);
     QLabel *pctLabel = new QLabel(QString::number(displayScore) + "%", this);
     pctLabel->setAlignment(Qt::AlignRight | Qt::AlignTop);
     layout->addWidget(pctLabel);
