@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 
-MainWindow::MainWindow(Structure *graph, Structure *hashmap, QWidget *parent) 
+MainWindow::MainWindow(Structure *graph, Structure *hashmap, QWidget *parent)
     : QMainWindow(parent),
       graphStructure(graph),
       hashMapStructure(hashmap)
@@ -11,12 +11,12 @@ MainWindow::MainWindow(Structure *graph, Structure *hashmap, QWidget *parent)
     structureScreen = new StructureSelect(this);
     resultsScreen = new ResultsScreen(this);
 
-    stackedWidget->addWidget(inputScreen);       
-    stackedWidget->addWidget(structureScreen);   
-    stackedWidget->addWidget(resultsScreen);    
+    stackedWidget->addWidget(inputScreen);
+    stackedWidget->addWidget(structureScreen);
+    stackedWidget->addWidget(resultsScreen);
 
     setCentralWidget(stackedWidget);
-    resize(800, 600); 
+    resize(800, 600);
 
     connect(inputScreen, &IngredientInput::ingredientsSubmitted,
             this, &MainWindow::handleIngredientsSubmitted);
@@ -25,19 +25,23 @@ MainWindow::MainWindow(Structure *graph, Structure *hashmap, QWidget *parent)
             this, &MainWindow::handleStructureSelected);
 }
 
-void MainWindow::handleIngredientsSubmitted(const std::vector<std::string> &ingredients) {
+void MainWindow::handleIngredientsSubmitted(const std::vector<std::string> &ingredients)
+{
     currentIngredients = ingredients;
     stackedWidget->setCurrentIndex(1);
 }
 
-void MainWindow::handleStructureSelected(int selection) {
-    std::vector <RecipeMatch> matches;
+void MainWindow::handleStructureSelected(int selection)
+{
+    std::vector<RecipeMatch> matches;
 
-    if (selection == StructureSelect::HASHMAP) {
-        matches = hashMapStructure->getTopN(currentIngredients, 20);
+    if (selection == StructureSelect::HASHMAP)
+    {
+        matches = hashMapStructure->getTopN(currentIngredients, 100);
     }
-    else if (selection == StructureSelect::GRAPH) {
-        matches = graphStructure->getTopN(currentIngredients, 20);
+    else if (selection == StructureSelect::GRAPH)
+    {
+        matches = graphStructure->getTopN(currentIngredients, 100);
     }
 
     resultsScreen->setRecipes(matches);
