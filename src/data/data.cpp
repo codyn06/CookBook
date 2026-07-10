@@ -113,9 +113,6 @@ std::vector<Recipe> loadRecipes(const std::string &filename)
         }
 
         recipe.title = row[1];
-        recipe.ingredients = parseStringifiedList(row[2]);
-        recipe.directions = parseStringifiedList(row[3]);
-        recipe.link = row[4];
         recipe.ner = parseStringifiedList(row[6]);
 
         recipes.push_back(std::move(recipe));
