@@ -1,13 +1,14 @@
 cmake_minimum_required(VERSION 3.14)
-project(Project_2)
+project(CookBook)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
-find_package(Qt6 COMPONENTS Widgets REQUIRED)
+set(CMAKE_AUTORCC ON)
+
+find_package(Qt6 COMPONENTS Core Widgets Gui REQUIRED)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -17,7 +18,8 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(Project_2 src/main.cpp
+add_executable(CookBook
+        src/main.cpp
         src/data/data.h
         src/data/data.cpp
         src/data/Recipe.h
@@ -26,12 +28,20 @@ add_executable(Project_2 src/main.cpp
         src/structures/hashmap/HashMap.h
         src/structures/graph/Graph.cpp
         src/structures/graph/Graph.h
+        src/gui/IngredientInput.h
+        src/gui/IngredientInput.cpp
+        src/gui/flowlayout.h
+        src/gui/flowlayout.cpp
+        src/gui/RecipeCard.h
+        src/gui/RecipeCard.cpp
+        src/gui/ResultsScreen.h
+        src/gui/ResultsScreen.cpp
         src/gui/StructureSelect.h
-        src/gui/StructureSelect.cpp)
+        src/gui/StructureSelect.cpp
+)
 
-target_link_libraries(Project_2 PRIVATE Qt6::Widgets)
-
-target_include_directories(Project_2 PRIVATE src)
+target_include_directories(CookBook PRIVATE src)
+target_link_libraries(CookBook PRIVATE Qt6::Core Qt6::Widgets Qt6::Gui)
 
 add_executable(Tests
         tests/test_data.cpp
@@ -58,6 +68,32 @@ add_executable(Test_Integration
 
 target_include_directories(Test_Integration PRIVATE src)
 target_link_libraries(Test_Integration PRIVATE Catch2::Catch2WithMain)
+
+add_executable(Test_IngredientInput
+        tests/test_ingredientinput.cpp
+        src/gui/ingredientinput.cpp
+        src/gui/flowlayout.cpp
+)
+
+target_include_directories(Test_IngredientInput PRIVATE src)
+target_link_libraries(Test_IngredientInput PRIVATE Qt6::Widgets)
+
+add_executable(Test_Results
+        tests/test_results.cpp
+        
+        src/gui/ResultsScreen.h
+        src/gui/ResultsScreen.cpp
+        src/gui/RecipeCard.h
+        src/gui/RecipeCard.cpp
+
+        src/data/data.h
+        src/data/data.cpp
+        src/data/Recipe.h
+        src/structures/Structure.h
+)
+
+target_include_directories(Test_Results PRIVATE src)
+target_link_libraries(Test_Results PRIVATE Qt6::Core Qt6::Widgets Qt6::Gui)
 
 include(CTest)
 include(Catch)
