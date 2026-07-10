@@ -34,6 +34,8 @@ add_executable(CookBook
         src/gui/flowlayout.cpp
         src/gui/RecipeCard.h
         src/gui/RecipeCard.cpp
+        src/gui/ResultsScreen.h
+        src/gui/ResultsScreen.cpp
 )
 
 target_include_directories(CookBook PRIVATE src)
