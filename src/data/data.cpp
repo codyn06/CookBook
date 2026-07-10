@@ -1,12 +1,13 @@
 #include "data.h"
 #include <fstream>
 #include <iostream>
+#include <set>
 // ,title,ingredients,directions,link,source,NER
 // 0,No-Bake Nut Cookies,"[""1 c. firmly packed brown sugar"", ""1/2 c. evaporated milk"", ""1/2 tsp. vanilla"", ""1/2 c. broken nuts (pecans)"", ""2 Tbsp. butter or margarine"", ""3 1/2 c. bite size shredded rice biscuits""]","[""In a heavy 2-quart saucepan, mix brown sugar, nuts, evaporated milk and butter or margarine."", ""Stir over medium heat until mixture bubbles all over top."", ""Boil and stir 5 minutes more. Take off heat."", ""Stir in vanilla and cereal; mix well."", ""Using 2 teaspoons, drop and shape into 30 clusters on wax paper."", ""Let stand until firm, about 30 minutes.""]",www.cookbooks.com/Recipe-Details.aspx?id=44874,Gathered,"[""brown sugar"", ""milk"", ""vanilla"", ""nuts"", ""butter"", ""bite size shredded rice biscuits""]"
 
 std::vector<std::string> parseStringifiedList(const std::string &listStr)
 {
-    std::vector<std::string> result;
+    std::set<std::string> uniqueItems;
     bool inQuote = false;
     char quoteChar = '\0';
     std::string currentItem = "";
@@ -25,7 +26,7 @@ std::vector<std::string> parseStringifiedList(const std::string &listStr)
             else if (c == quoteChar)
             {
                 inQuote = false;
-                result.push_back(currentItem);
+                uniqueItems.insert(currentItem);
                 currentItem = "";
             }
             else
@@ -38,7 +39,8 @@ std::vector<std::string> parseStringifiedList(const std::string &listStr)
             currentItem += c;
         }
     }
-    return result;
+
+    return std::vector<std::string>(uniqueItems.begin(), uniqueItems.end());
 }
 
 std::vector<std::string> parseCSVRow(const std::string &line)
@@ -113,11 +115,12 @@ std::vector<Recipe> loadRecipes(const std::string &filename)
         }
 
         recipe.title = row[1];
-        recipe.ingredients = parseStringifiedList(row[2]);
-        recipe.directions = parseStringifiedList(row[3]);
-        recipe.link = row[4];
         recipe.ner = parseStringifiedList(row[6]);
 
+        if (recipe.ner.size() <= 2)
+        {
+            continue;
+        }
         recipes.push_back(std::move(recipe));
 
         count++;

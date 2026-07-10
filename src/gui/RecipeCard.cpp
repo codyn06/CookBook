@@ -2,20 +2,21 @@
 #include <QString>
 #include <QStringList>
 
-RecipeCard::RecipeCard(const RecipeMatch& match, QWidget *parent) 
-    : QFrame(parent) {
-    
+RecipeCard::RecipeCard(const RecipeMatch &match, QWidget *parent)
+    : QFrame(parent)
+{
+
     this->setFrameShape(QFrame::StyledPanel);
     this->setStyleSheet(
         "RecipeCard { border: 1px solid black; border-radius: 8px; background-color: white; }"
-        "QLabel { color: black; }" 
-    );
-    this->setFixedSize(220, 350); 
+        "QLabel { color: black; }");
+    this->setFixedSize(220, 350);
 
     setupUi(match);
 }
 
-void RecipeCard::setupUi(const RecipeMatch& match) {
+void RecipeCard::setupUi(const RecipeMatch &match)
+{
     QVBoxLayout *layout = new QVBoxLayout(this);
 
     int displayScore = static_cast<int>(match.score * 100.0);
@@ -42,15 +43,18 @@ void RecipeCard::setupUi(const RecipeMatch& match) {
     ingredientsLabel->setTextFormat(Qt::RichText);
 
     QStringList presentIngredients;
-    for (const auto& ing : match.recipe.ingredients) {
+    for (const auto &ing : match.recipe.ner)
+    {
         presentIngredients << QString::fromStdString(ing);
     }
-    
+
     QString ingredientsHtml = "ingredients: " + presentIngredients.join(", ") + "<br><br>";
 
-    if (!match.missing.empty()) {
+    if (!match.missing.empty())
+    {
         QStringList missingList;
-        for (const auto& missingIng : match.missing) {
+        for (const auto &missingIng : match.missing)
+        {
             missingList << QString::fromStdString(missingIng);
         }
         ingredientsHtml += "<span style='color:red;'>x " + missingList.join(", ") + "</span>";
@@ -58,6 +62,6 @@ void RecipeCard::setupUi(const RecipeMatch& match) {
 
     ingredientsLabel->setText(ingredientsHtml);
     layout->addWidget(ingredientsLabel);
-    
+
     layout->addStretch();
 }
