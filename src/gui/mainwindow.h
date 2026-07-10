@@ -9,12 +9,13 @@
 #include "IngredientInput.h"
 #include "StructureSelect.h"
 #include "ResultsScreen.h"
+#include "structures/Structure.h"
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(Structure *graph, Structure *hashmap, QWidget *parent = nullptr);
     ~MainWindow() = default;
 
 private slots:
@@ -29,6 +30,9 @@ private:
     ResultsScreen *resultsScreen;
 
     std::vector<std::string> currentIngredients;
+
+    Structure *graphStructure;
+    Structure *hashMapStructure;
 };
 
 #endif // MAINWINDOW_H
