@@ -45,11 +45,11 @@ mkdir build
 cd build
 cmake .. -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH="C:/msys64/mingw64"
 cmake --build . --target CookBook -j 16
-# Replace `16` with your CPU's thread count:
-# - **PowerShell:** `$env:NUMBER_OF_PROCESSORS`
-# - **Command Prompt:** `echo %NUMBER_OF_PROCESSORS%`
-# - **MSYS2/Git Bash:** `nproc`
 ```
+Replace `16` with your CPU's thread count:
+- **PowerShell:** `$env:NUMBER_OF_PROCESSORS`
+- **Command Prompt:** `echo %NUMBER_OF_PROCESSORS%`
+- **MSYS2/Git Bash:** `nproc`
 
 ### Run
 ```bash
