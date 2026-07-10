@@ -1,44 +1,72 @@
-# CookBook
-Find recipes using ingredients you have on hand.
 
-## Workflow
-### Setup
- - Navigate to a directory in which you will clone the repository.
- - Use the terminal and use the command ``git clone https://github.com/codyn06/CookBook``.
- - Download the dataset from [https://recipenlg.cs.put.poznan.pl/](https://recipenlg.cs.put.poznan.pl/).
- - Unzip the dataset into the project. This should create a directory called ``dataset/`` with a file named ``full_dataset.csv`` within.
-### Contributing
- - Find an issue under the ``Issue`` tab found on the top bar of the GitHub.
- - Under ``Assignees`` in the right sidebar of the issue, assign yourself.
- - If applicable, click on the ``Parent`` issue located under the issue title.
- -  Under ``Development``, if there is no branch for the issue, create one and name it appropriately. 
- - In your code editor or IDE, navigate to the project and use command ``git checkout [branch name]``.
-#### Notes
-- Before starting work, ensure to ``git pull`` for the latest updates. (``git pull origin main`` if needed)
-- Ensure to``git add [filepath or .]`` and ``git commit -m "[message]"`` every time you make marginal progress.
-- Use ``git push`` when your changes are ready to be pushed to the branch.
-- Document all methods and functions in [this documentation](https://docs.google.com/document/d/1wpaZSOx3Bql3ahKisEiDF4Ub_wttGJqreJTHL9evK2c/edit?tab=t.4vus17tgb0ye) with a short description and their **input (parameters/arguments)** and **output (return value)**.
-- Do not push directly to ``main`` with substantial changes. Instead, go to the ``Pull requests`` tab, and create a ``New pull request`` from the branch to main. Ensure that the changes are ready. Request a review from a teammate.
-## Project Structure
+## Setup
+
+### Prerequisites
+- **Git** — for cloning the repository
+- **MSYS2** — [download here](https://www.msys2.org/) (provides `pacman`, a C++ compiler, CMake, and Qt6 all in one place)
+
+### Install dependencies via pacman
+Open the **MSYS2 MinGW 64-bit** terminal (not the plain MSYS2 terminal) and run:
+
+```bash
+pacman -Syu
 ```
-CookBook/
-├── dataset/                  # Raw dataset (gitignored — see Setup)
-│   └── full_dataset.csv
-├── src/
-│   ├── main.cpp
-│   ├── data/                 # CSV loading & parsing
-│   ├── structures/
-│   │   ├── hashmap/          # Inverted hash map implementation
-│   │   └── graph/            # Bipartite graph implementation
-│   └── gui/                  # Qt interface
-├── tests/                    # Unit tests
-├── .gitignore
-├── CMakeLists.txt
+
+Restart the terminal if prompted, then run:
+```bash
+pacman -S mingw-w64-x86_64-gcc mingw-w64-x86_64-cmake mingw-w64-x86_64-qt6-base mingw-w64-x86_64-qt6-tools
+```
+
+This installs:
+- `mingw-w64-x86_64-gcc` — C++ compiler
+- `mingw-w64-x86_64-cmake` — CMake
+- `mingw-w64-x86_64-qt6-base` — Qt6 Widgets and core modules
+- `mingw-w64-x86_64-qt6-tools` — Qt's dev tools (includes `moc`)
+
+**Add MinGW64 to your PATH** so `cmake`, `g++`, etc. are available outside the MSYS2 terminal too. The binaries are typically located at: `C:\msys64\mingw64\bin`
+
+Add this path to your system's `PATH` environment variable (Windows Settings → Edit environment variables).
+
+### Clone the repository
+```bash
+git clone https://github.com/codyn06/CookBook
+cd CookBook
+```
+
+### Download the dataset
+- Download the dataset from [https://recipenlg.cs.put.poznan.pl/](https://recipenlg.cs.put.poznan.pl/).
+- Unzip it into the project root. This should create a directory called `dataset/` containing `full_dataset.csv`.
+
+### Build the project
+Run these from the **MSYS2 MinGW 64-bit** terminal (or a regular terminal if `mingw64/bin` is on your `PATH`):
+
+```bash
+mkdir build
+cd build
+cmake .. -G "MinGW Makefiles" -DCMAKE_PREFIX_PATH="C:/msys64/mingw64"
+cmake --build .
+```
+
+### Run
+```bash
+./CookBook.exe
+```
+
+## Project Structure
+
+```CookBook/  
+├── dataset/           # Raw dataset (gitignored — see Setup)  
+│ └── full_dataset.csv  
+├── src/  
+│ ├── main.cpp  
+│ ├── data/            # CSV loading & parsing  
+│ ├── gui/             # Qt interface (IngredientInput, FlowLayout, etc.)  
+│ └── structures/  
+│ ├── Structure.h      # Shared interface for hash map & graph  
+│ ├── graph/           # Bipartite graph implementation  
+│ └── hashmap/         # Inverted hash map implementation  
+├── tests/
+├── .gitignore  
+├── CMakeLists.txt  
 └── README.md
 ```
-
-- **``data/``** — Loads ``dataset/full_dataset.csv``, parses list-style fields, produces``Recipe`` structs for the data structures to consume.
-- **``structures/hashmap/``** — Inverted hash map: ingredient → recipe IDs, with match scoring and top-N extraction.
-- **``structures/graph/``** — Bipartite graph: recipe/ingredient nodes and edges, with match scoring and top-N extraction.
-- **``gui/``** — Qt-based interface (ingredient input, data structure selection, results display).
-- **``benchmark/``** — Compares runtime and memory usage between the hash map and graph implementations on the full dataset.
