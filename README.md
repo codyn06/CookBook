@@ -30,8 +30,7 @@ CookBook/
 │   ├── structures/
 │   │   ├── hashmap/          # Inverted hash map implementation
 │   │   └── graph/            # Bipartite graph implementation
-│   ├── gui/                  # Qt interface
-│   └── benchmark/            # Runtime/memory comparison tools
+│   └── gui/                  # Qt interface
 ├── tests/                    # Unit tests
 ├── .gitignore
 ├── CMakeLists.txt
