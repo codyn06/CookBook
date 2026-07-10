@@ -18,22 +18,22 @@ int main(int argc, char *argv[])
 
     Recipe r1;
     r1.title = "Chicken Picatta";
-    r1.ingredients = {"chicken", "lemon", "butter", "capers"};
+    r1.ner = {"chicken", "lemon", "butter", "capers"};
     testMatches.push_back({r1, 100.0, {}}); 
 
     Recipe r2;
     r2.title = "Chicken Tikka Masala";
-    r2.ingredients = {"chicken", "yogurt", "garam masala", "tomato puree"};
+    r2.ner = {"chicken", "yogurt", "garam masala", "tomato puree"};
     testMatches.push_back({r2, 100.0, {}});
 
     Recipe r3;
     r3.title = "Chicken Parmesan";
-    r3.ingredients = {"chicken", "tomato sauce", "mozzarella"};
+    r3.ner = {"chicken", "tomato sauce", "mozzarella"};
     testMatches.push_back({r3, 90.0, {"parmesan"}});
 
     Recipe r4;
     r4.title = "Chicken Marsala";
-    r4.ingredients = {"chicken", "marsala wine", "mushrooms"};
+    r4.ner = {"chicken", "marsala wine", "mushrooms"};
     testMatches.push_back({r4, 80.0, {}});
 
     results.setRecipes(testMatches);

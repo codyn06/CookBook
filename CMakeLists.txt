@@ -20,14 +20,17 @@ FetchContent_MakeAvailable(Catch2)
 
 add_executable(CookBook
         src/main.cpp
+
         src/data/data.h
         src/data/data.cpp
         src/data/Recipe.h
+
         src/structures/Structure.h
         src/structures/hashmap/HashMap.cpp
         src/structures/hashmap/HashMap.h
         src/structures/graph/Graph.cpp
         src/structures/graph/Graph.h
+
         src/gui/IngredientInput.h
         src/gui/IngredientInput.cpp
         src/gui/flowlayout.h
@@ -36,6 +39,10 @@ add_executable(CookBook
         src/gui/RecipeCard.cpp
         src/gui/ResultsScreen.h
         src/gui/ResultsScreen.cpp
+        src/gui/StructureSelect.h
+        src/gui/StructureSelect.cpp
+        src/gui/mainwindow.h
+        src/gui/mainwindow.cpp
 )
 
 target_include_directories(CookBook PRIVATE src)
@@ -92,6 +99,46 @@ add_executable(Test_Results
 
 target_include_directories(Test_Results PRIVATE src)
 target_link_libraries(Test_Results PRIVATE Qt6::Core Qt6::Widgets Qt6::Gui)
+
+add_executable(Test_StructureSelect
+        tests/test_structureselect.cpp
+        
+        src/gui/StructureSelect.h
+        src/gui/StructureSelect.cpp
+)
+
+target_include_directories(Test_StructureSelect PRIVATE src)
+target_link_libraries(Test_StructureSelect PRIVATE Qt6::Core Qt6::Widgets Qt6::Gui)
+
+add_executable(Test_MainWindow
+        tests/test_mainwindow.cpp
+        
+        src/gui/mainwindow.h
+        src/gui/mainwindow.cpp
+        
+        src/gui/IngredientInput.h
+        src/gui/IngredientInput.cpp
+        src/gui/flowlayout.h
+        src/gui/flowlayout.cpp
+        src/gui/StructureSelect.h
+        src/gui/StructureSelect.cpp
+        src/gui/ResultsScreen.h
+        src/gui/ResultsScreen.cpp
+        src/gui/RecipeCard.h
+        src/gui/RecipeCard.cpp
+
+        src/data/data.h
+        src/data/data.cpp
+        src/data/Recipe.h
+        src/structures/Structure.h
+        src/structures/hashmap/HashMap.h
+        src/structures/hashmap/HashMap.cpp
+        src/structures/graph/Graph.h
+        src/structures/graph/Graph.cpp
+)
+
+target_include_directories(Test_MainWindow PRIVATE src)
+target_link_libraries(Test_MainWindow PRIVATE Qt6::Core Qt6::Widgets Qt6::Gui)
 
 include(CTest)
 include(Catch)
