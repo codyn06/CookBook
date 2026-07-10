@@ -32,6 +32,8 @@ add_executable(CookBook
         src/gui/IngredientInput.cpp
         src/gui/flowlayout.h
         src/gui/flowlayout.cpp
+        src/gui/RecipeCard.h
+        
 )
 
 target_include_directories(CookBook PRIVATE src)
