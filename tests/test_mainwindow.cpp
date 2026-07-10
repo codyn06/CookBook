@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 
     MainWindow mainWindow(&testGraph, &testHashMap);
     mainWindow.setWindowTitle("Test: Main Flow");
-    mainWindow.resize(800, 600);
+    mainWindow.setFixedSize(960, 800);
     mainWindow.show();
 
     return app.exec();

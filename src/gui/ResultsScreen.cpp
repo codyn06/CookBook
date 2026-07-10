@@ -3,6 +3,8 @@
 #include <QScrollArea>
 
 ResultsScreen::ResultsScreen(QWidget *parent) : QWidget(parent) {
+    this->setFixedSize(960,800);
+    
     mainLayout = new QVBoxLayout(this);
 
     headerLabel = new QLabel("Top Recipes:", this);
@@ -22,6 +24,8 @@ ResultsScreen::ResultsScreen(QWidget *parent) : QWidget(parent) {
     QWidget *scrollContainer = new QWidget();
 
     cardsLayout = new QGridLayout(scrollContainer);
+    cardsLayout->setSpacing(10); 
+    cardsLayout->setContentsMargins(10, 10, 10, 10);
     cardsLayout->setAlignment(Qt::AlignTop | Qt::AlignLeft); 
 
     scrollArea->setWidget(scrollContainer);

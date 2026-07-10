@@ -16,7 +16,7 @@ MainWindow::MainWindow(Structure *graph, Structure *hashmap, QWidget *parent)
     stackedWidget->addWidget(resultsScreen);    
 
     setCentralWidget(stackedWidget);
-    resize(800, 600); 
+    resize(960, 800); 
 
     connect(inputScreen, &IngredientInput::ingredientsSubmitted,
             this, &MainWindow::handleIngredientsSubmitted);
