@@ -20,3 +20,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent) {
     connect(structureScreen, &StructureSelect::nextPressed,
             this, &MainWindow::handleStructureSelected);
 }
+
+void MainWindow::handleIngredientsSubmitted(const std::vector<std::string> &ingredients) {
+    currentIngredients = ingredients;
+    stackedWidget->setCurrentIndex(1);
+}
