@@ -76,6 +76,23 @@ add_executable(Test_IngredientInput
 target_include_directories(Test_IngredientInput PRIVATE src)
 target_link_libraries(Test_IngredientInput PRIVATE Qt6::Widgets)
 
+add_executable(Test_Results
+        tests/test_results.cpp
+        
+        src/gui/ResultsScreen.h
+        src/gui/ResultsScreen.cpp
+        src/gui/RecipeCard.h
+        src/gui/RecipeCard.cpp
+
+        src/data/data.h
+        src/data/data.cpp
+        src/data/Recipe.h
+        src/structures/Structure.h
+)
+
+target_include_directories(Test_Results PRIVATE src)
+target_link_libraries(Test_Results PRIVATE Qt6::Core Qt6::Widgets Qt6::Gui)
+
 include(CTest)
 include(Catch)
 catch_discover_tests(Tests)
