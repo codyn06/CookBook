@@ -1,5 +1,6 @@
 #include "IngredientInput.h"
 #include <algorithm>
+#include <QLabel>
 
 IngredientInput::IngredientInput(QWidget *parent) : QWidget(parent)
 {
@@ -9,6 +10,11 @@ IngredientInput::IngredientInput(QWidget *parent) : QWidget(parent)
 void IngredientInput::setupUi()
 {
     QVBoxLayout *mainLayout = new QVBoxLayout(this);
+
+    QLabel *titleLabel = new QLabel("CookBook", this);
+    titleLabel->setAlignment(Qt::AlignCenter);
+    titleLabel->setStyleSheet("font-size: 24px; font-weight: bold;");
+    mainLayout->addWidget(titleLabel);
 
     ingredientTextField = new QLineEdit(this);
     ingredientTextField->setPlaceholderText("(enter ingredients here...)");
