@@ -6,7 +6,6 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QGridLayout>
 #include <vector>
 #include "flowlayout.h"
 
@@ -28,6 +27,7 @@ private:
     QVBoxLayout *mainLayout;
     QLabel *headerLabel;
     QPushButton *homeButton;
+    QWidget *scrollContainer;
     FlowLayout *cardsLayout;
 };
 

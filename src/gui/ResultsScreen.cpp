@@ -28,10 +28,11 @@ ResultsScreen::ResultsScreen(QWidget *parent) : QWidget(parent)
     scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
     scrollArea->setFrameShape(QFrame::NoFrame);
 
-    QWidget *scrollContainer = new QWidget();
+    scrollContainer = new QWidget();
 
     cardsLayout = new FlowLayout(scrollContainer, 10, 10, 10);
     cardsLayout->setContentsMargins(10, 10, 10, 10);
+    scrollContainer->setLayout(cardsLayout);
 
     scrollArea->setWidget(scrollContainer);
     mainLayout->addWidget(scrollArea);
@@ -45,10 +46,14 @@ void ResultsScreen::setRecipes(const std::vector<RecipeMatch> &matches)
     {
         if (child->widget())
         {
+            child->widget()->setParent(nullptr);
             delete child->widget();
         }
         delete child;
     }
+
+    cardsLayout->invalidate();
+    scrollContainer->updateGeometry();
 
     // Handles case if user's ingredient input does not match to any recipes.
     if (matches.empty())
@@ -68,7 +73,10 @@ void ResultsScreen::setRecipes(const std::vector<RecipeMatch> &matches)
 
     for (const auto &match : matches)
     {
-        RecipeCard *card = new RecipeCard(match, this);
+        RecipeCard *card = new RecipeCard(match, scrollContainer);
         cardsLayout->addWidget(card);
     }
+
+    cardsLayout->invalidate();
+    scrollContainer->updateGeometry();
 }
