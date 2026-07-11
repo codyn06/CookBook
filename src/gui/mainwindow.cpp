@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include <QCoreApplication>
 
 MainWindow::MainWindow(const std::vector<Recipe>& recipes, QWidget *parent)
     : QMainWindow(parent),
@@ -11,10 +12,12 @@ MainWindow::MainWindow(const std::vector<Recipe>& recipes, QWidget *parent)
     // Create instances of the screens, and add it to the stack widget to allow for movement between them.
     inputScreen = new IngredientInput(this);
     structureScreen = new StructureSelect(this);
+    loadingScreen = new LoadingScreen(this);
     resultsScreen = new ResultsScreen(this);
 
     stackedWidget->addWidget(inputScreen);
     stackedWidget->addWidget(structureScreen);
+    stackedWidget->addWidget(loadingScreen);
     stackedWidget->addWidget(resultsScreen);
 
     setCentralWidget(stackedWidget);
@@ -42,6 +45,8 @@ void MainWindow::handleIngredientsSubmitted(const std::vector<std::string> &ingr
 
 void MainWindow::handleStructureSelected(int selection)
 {
+    stackedWidget->setCurrentIndex(2);
+    QCoreApplication::processEvents();
     std::vector<RecipeMatch> matches;
 
     // Build the hashmap AFTER user selects it in selection screen
@@ -63,7 +68,7 @@ void MainWindow::handleStructureSelected(int selection)
     }
 
     resultsScreen->setRecipes(matches);
-    stackedWidget->setCurrentIndex(2);
+    stackedWidget->setCurrentIndex(3);
 }
 
 void MainWindow::handleHomeRequested()

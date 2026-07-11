@@ -31,6 +31,8 @@ add_executable(CookBook
         src/structures/graph/Graph.cpp
         src/structures/graph/Graph.h
 
+        src/gui/LoadingScreen.h
+        src/gui/LoadingScreen.cpp
         src/gui/IngredientInput.h
         src/gui/IngredientInput.cpp
         src/gui/flowlayout.h
@@ -116,6 +118,8 @@ add_executable(Test_MainWindow
         src/gui/mainwindow.h
         src/gui/mainwindow.cpp
         
+        src/gui/LoadingScreen.h
+        src/gui/LoadingScreen.cpp
         src/gui/IngredientInput.h
         src/gui/IngredientInput.cpp
         src/gui/flowlayout.h

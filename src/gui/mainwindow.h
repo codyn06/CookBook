@@ -12,6 +12,7 @@
 #include "structures/Structure.h"
 #include "structures/graph/Graph.h"
 #include "structures/hashmap/HashMap.h"
+#include "LoadingScreen.h"
 #include "data/data.h"
 
 class MainWindow : public QMainWindow {
@@ -31,6 +32,7 @@ private:
     
     IngredientInput *inputScreen;
     StructureSelect *structureScreen;
+    LoadingScreen *loadingScreen;
     ResultsScreen *resultsScreen;
 
     std::vector<std::string> currentIngredients;
