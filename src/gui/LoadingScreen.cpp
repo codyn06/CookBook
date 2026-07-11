@@ -6,14 +6,14 @@ LoadingScreen::LoadingScreen(QWidget *parent) : QWidget(parent) {
     
     messageLabel = new QLabel("Building data structure and querying recipes...", this);
     messageLabel->setAlignment(Qt::AlignCenter);
-    
-    progressBar = new QProgressBar(this);
-    progressBar->setRange(0, 0); // 0,0 range makes the bar bounce back and forth automatically
-    progressBar->setTextVisible(false);
+
+    QFont font = messageLabel->font();
+    font.setPointSize(14);
+    font.setBold(true);
+    messageLabel->setFont(font);
     
     layout->addStretch();
     layout->addWidget(messageLabel);
-    layout->addWidget(progressBar);
     layout->addStretch();
     
     setLayout(layout);

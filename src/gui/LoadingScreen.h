@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QLabel>
-#include <QProgressBar>
 
 class LoadingScreen : public QWidget {
     Q_OBJECT
@@ -13,7 +12,6 @@ public:
     
 private:
     QLabel *messageLabel;
-    QProgressBar *progressBar;
 };
 
 #endif // LOADINGSCREEN_H
