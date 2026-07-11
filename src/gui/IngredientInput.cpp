@@ -75,6 +75,7 @@ void IngredientInput::onNextClicked()
 {
     if (!selectedIngredients.empty())
     {
+        // Send signal
         emit ingredientsSubmitted(selectedIngredients);
     }
 }

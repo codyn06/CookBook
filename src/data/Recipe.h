@@ -7,7 +7,7 @@ struct Recipe
 {
     int id;
     std::string title;
-    std::vector<std::string> ner;
+    std::vector<std::string> ner; // raw ingredients
 };
 
 #endif // RECIPE_H

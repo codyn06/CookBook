@@ -1,3 +1,5 @@
+/* Code from Qt documentation: https://doc.qt.io/qt-6/qtwidgets-layouts-flowlayout-example.html */
+
 #include "flowlayout.h"
 #include <QWidget>
 
