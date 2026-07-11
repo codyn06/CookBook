@@ -15,6 +15,7 @@ int main(int argc, char *argv[])
     QPixmap pixmap(500, 300);
     pixmap.fill(Qt::white);
     
+    // Loading screen while recipes are loaded from csv
     QSplashScreen splash(pixmap);
     
     splash.show();

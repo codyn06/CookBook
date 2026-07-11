@@ -105,6 +105,8 @@ std::vector<int> HashMap::search(const std::string &ingredient)
     return std::vector<int>{};
 }
 
+
+// Hash function: Multiply the current hash by 31 and add the ASCII value of the char.
 int HashMap::hashFunction(const std::string &ingredient)
 {
 
