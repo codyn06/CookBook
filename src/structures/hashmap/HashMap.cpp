@@ -10,6 +10,7 @@ HashMap::HashMap(int cap) : capacity(cap), size(0)
 
 HashMap::HashMap(const std::vector<Recipe> &recipes)
 {
+    // Large prime to mitigate collisions in our hash function.
     capacity = 100003;
     size = 0;
     table.resize(capacity, nullptr);
