@@ -8,6 +8,7 @@ MainWindow::MainWindow(const std::vector<Recipe>& recipes, QWidget *parent)
 {
     stackedWidget = new QStackedWidget(this);
 
+    // Create instances of the screens, and add it to the stack widget to allow for movement between them.
     inputScreen = new IngredientInput(this);
     structureScreen = new StructureSelect(this);
     resultsScreen = new ResultsScreen(this);
@@ -43,6 +44,8 @@ void MainWindow::handleStructureSelected(int selection)
 {
     std::vector<RecipeMatch> matches;
 
+    // Build the hashmap AFTER user selects it in selection screen
+    // Check that its nullptr so that it does not build the data structure from scratch again
     if (selection == StructureSelect::HASHMAP)
     { 
         if (hashMapStructure == nullptr) {
@@ -50,6 +53,7 @@ void MainWindow::handleStructureSelected(int selection)
         }
         matches = hashMapStructure->getTopN(currentIngredients, 100);
     }
+    // Build the graph AFTER user selects it in selection screen
     else if (selection == StructureSelect::GRAPH)
     {
         if (graphStructure == nullptr) {
