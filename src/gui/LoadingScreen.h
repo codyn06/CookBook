@@ -1,6 +1,10 @@
 #ifndef LOADINGSCREEN_H
 #define LOADINGSCREEN_H
 
+#include <QWidget>
+#include <QLabel>
+#include <QProgressBar>
+
 class LoadingScreen : public QWidget {
     Q_OBJECT
 
