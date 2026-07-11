@@ -23,9 +23,14 @@ This installs:
 - `mingw-w64-x86_64-qt6-base` — Qt6 Widgets and core modules
 - `mingw-w64-x86_64-qt6-tools` — Qt's dev tools (includes `moc`)
 
-**Add MinGW64 to your PATH** so `cmake`, `g++`, etc. are available outside the MSYS2 terminal too. The binaries are typically located at: `C:\msys64\mingw64\bin`
+### Configure System Path
+To ensure standard terminals (like Git Bash, VSCode, or Command Prompt) and IDEs can find these tools, you must add the MinGW binaries to your system's `PATH`.
 
-Add this path to your system's `PATH` environment variable (Windows Settings → Edit environment variables).
+1. Open Windows Search and type **Edit the system environment variables**.
+2. Click **Environment Variables...** at the bottom.
+3. Under System Variables (or User Variables), find `Path` and click **Edit**.
+4. Add the following path: `C:\msys64\mingw64\bin` 
+5. Click OK and restart any open terminals or IDEs.
 
 ### Clone the repository
 ```bash
