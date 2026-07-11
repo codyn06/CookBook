@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QStackedWidget>
+#include <QCloseEvent>
 #include <vector>
 #include <string>
 
@@ -15,11 +16,12 @@
 #include "LoadingScreen.h"
 #include "data/data.h"
 
-class MainWindow : public QMainWindow {
+class MainWindow : public QMainWindow
+{
     Q_OBJECT
 
 public:
-    explicit MainWindow(const std::vector<Recipe>& recipes, QWidget *parent = nullptr);
+    explicit MainWindow(const std::vector<Recipe> &recipes, QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
@@ -27,9 +29,12 @@ private slots:
     void handleStructureSelected(int selection);
     void handleHomeRequested();
 
+protected:
+    void closeEvent(QCloseEvent *event) override;
+
 private:
     QStackedWidget *stackedWidget;
-    
+
     IngredientInput *inputScreen;
     StructureSelect *structureScreen;
     LoadingScreen *loadingScreen;

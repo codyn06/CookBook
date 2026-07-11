@@ -1,7 +1,8 @@
 #include "mainwindow.h"
 #include <QCoreApplication>
+#include <QApplication>
 
-MainWindow::MainWindow(const std::vector<Recipe>& recipes, QWidget *parent)
+MainWindow::MainWindow(const std::vector<Recipe> &recipes, QWidget *parent)
     : QMainWindow(parent),
       allRecipes(recipes),
       graphStructure(nullptr),
@@ -21,7 +22,7 @@ MainWindow::MainWindow(const std::vector<Recipe>& recipes, QWidget *parent)
     stackedWidget->addWidget(resultsScreen);
 
     setCentralWidget(stackedWidget);
-    resize(960, 800); 
+    resize(960, 800);
 
     connect(inputScreen, &IngredientInput::ingredientsSubmitted,
             this, &MainWindow::handleIngredientsSubmitted);
@@ -32,9 +33,16 @@ MainWindow::MainWindow(const std::vector<Recipe>& recipes, QWidget *parent)
             this, &MainWindow::handleHomeRequested);
 }
 
-MainWindow::~MainWindow() {
+MainWindow::~MainWindow()
+{
     delete graphStructure;
     delete hashMapStructure;
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    QMainWindow::closeEvent(event);
+    QApplication::quit();
 }
 
 void MainWindow::handleIngredientsSubmitted(const std::vector<std::string> &ingredients)
@@ -52,8 +60,9 @@ void MainWindow::handleStructureSelected(int selection)
     // Build the hashmap AFTER user selects it in selection screen
     // Check that its nullptr so that it does not build the data structure from scratch again
     if (selection == StructureSelect::HASHMAP)
-    { 
-        if (hashMapStructure == nullptr) {
+    {
+        if (hashMapStructure == nullptr)
+        {
             hashMapStructure = new HashMap(allRecipes);
         }
         matches = hashMapStructure->getTopN(currentIngredients, 100);
@@ -61,7 +70,8 @@ void MainWindow::handleStructureSelected(int selection)
     // Build the graph AFTER user selects it in selection screen
     else if (selection == StructureSelect::GRAPH)
     {
-        if (graphStructure == nullptr) {
+        if (graphStructure == nullptr)
+        {
             graphStructure = new Graph(allRecipes);
         }
         matches = graphStructure->getTopN(currentIngredients, 100);

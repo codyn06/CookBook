@@ -6,27 +6,29 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QGridLayout>
 #include <vector>
+#include "flowlayout.h"
 
-#include "structures/Structure.h" 
+#include "structures/Structure.h"
 
-class ResultsScreen : public QWidget {
+class ResultsScreen : public QWidget
+{
     Q_OBJECT
 
 public:
     explicit ResultsScreen(QWidget *parent = nullptr);
-    
+
     void setRecipes(const std::vector<RecipeMatch> &matches);
 
 signals:
     void homeRequested();
 
 private:
-    QVBoxLayout *mainLayout;   
+    QVBoxLayout *mainLayout;
     QLabel *headerLabel;
     QPushButton *homeButton;
-    QGridLayout *cardsLayout;  
+    QWidget *scrollContainer;
+    FlowLayout *cardsLayout;
 };
 
 #endif // RESULTSSCREEN_H

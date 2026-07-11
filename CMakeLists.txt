@@ -87,7 +87,7 @@ target_link_libraries(Test_IngredientInput PRIVATE Qt6::Widgets)
 
 add_executable(Test_Results
         tests/test_results.cpp
-        
+
         src/gui/ResultsScreen.h
         src/gui/ResultsScreen.cpp
         src/gui/RecipeCard.h
@@ -97,6 +97,8 @@ add_executable(Test_Results
         src/data/data.cpp
         src/data/Recipe.h
         src/structures/Structure.h
+        src/gui/flowlayout.h
+        src/gui/flowlayout.cpp
 )
 
 target_include_directories(Test_Results PRIVATE src)
@@ -104,7 +106,7 @@ target_link_libraries(Test_Results PRIVATE Qt6::Core Qt6::Widgets Qt6::Gui)
 
 add_executable(Test_StructureSelect
         tests/test_structureselect.cpp
-        
+
         src/gui/StructureSelect.h
         src/gui/StructureSelect.cpp
 )
@@ -114,10 +116,10 @@ target_link_libraries(Test_StructureSelect PRIVATE Qt6::Core Qt6::Widgets Qt6::G
 
 add_executable(Test_MainWindow
         tests/test_mainwindow.cpp
-        
+
         src/gui/mainwindow.h
         src/gui/mainwindow.cpp
-        
+
         src/gui/LoadingScreen.h
         src/gui/LoadingScreen.cpp
         src/gui/IngredientInput.h
